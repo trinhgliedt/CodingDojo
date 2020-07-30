@@ -1,0 +1,22 @@
+*{
+    /* outline: 1px solid gray; */
+}
+#container{
+    width: 720px;
+    background-color: rgb(252, 220, 207);
+    display: inline-block;
+    justify-content: center;
+    padding: 60px;
+}
+img{
+    outline: 1px solid goldenrod;
+    width: 177px;
+    margin: 0px;
+}
+.wrap{
+    width: 177px;
+    height: 180px;
+    padding: 0;
+    display: inline-block;
+    /* border: 2px solid yellow; */
+}

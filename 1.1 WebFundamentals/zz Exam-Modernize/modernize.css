@@ -1,0 +1,187 @@
+*{
+margin: 0 auto;
+padding: 0;
+text-decoration: none;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+color: lightgray;
+/* outline: 1px solid brown; */
+}
+#wrapper{
+    
+    background-color: black;
+    padding: 10px;
+    width: 1200px;
+    
+    
+}
+header{
+    display: flex;
+    background-color: #1a1a1a;
+    }
+    header img{
+        width: 23%;
+        margin: 20px 55px 0px 20px;
+        
+    }
+        header p{
+            display: inline-block;
+            width: 68%;
+            text-align: right;
+            margin: 30px 0 0 0;
+        }
+#main-image{
+    border-bottom: 7px solid #3b3b3b;
+}
+
+h2, h3{
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+
+.orange-font{
+    color: #cc6727;
+}
+
+#content-container{
+    display: flex;
+    min-height: 190px;
+    background-color: #1a1a1a;
+    
+}
+.main-content{
+    display: inline-table;
+
+    margin: 0 10px 0 10px;
+    
+   
+}
+.main-content article{
+    
+    display: inline-block;
+    width: 75%;
+    
+}
+.main-content p{
+    color: #b2b7b3;
+    font-size: 12pt;
+}
+.main-content img{
+    float: left;
+    margin-top: 40px;
+    margin-right: 10px;
+}
+
+#menubar article{
+    width: 20%;
+    margin: 0 5px 0 0;
+    display: inline-block;
+}
+
+article h2{
+    margin: 40px 0 10px 0;
+   
+} 
+
+h1{
+    font-weight: 500;
+    margin-bottom: 20px;;
+}
+
+#buy-now-sec{
+    display: flex;
+    padding: 30px;
+    background-color: #121212;
+    
+}
+#buy-now-sec article{
+    width:85% ;
+    margin-right: 140px;
+   
+}
+
+#buy-now-sec a{
+    width: 160px;
+    margin-right: 30px;
+    margin-top: 15px;
+    text-align: center;
+    height: 40px;
+    font-size: 18pt;
+    padding: 10px 20px;
+    background: linear-gradient(180deg,#f08c5c,#f29b59 );
+    border-radius:10px ;
+    border-top: 2px solid #f7c099;
+    border-right: 2px solid #ef802e;
+    color: white;
+    
+}
+
+#menu-bar{
+    background: linear-gradient(180deg,#565656,#424242,black);
+    margin-top:10px;
+    display: flex;
+}
+
+.bold{
+    font-weight: bold;   
+}
+
+.menubar-button{
+    padding: 10px 25px;
+    margin: 8px 0px;
+    border-right: 1px solid #525252;
+}
+
+.img-scale{
+    width: 100%;
+}
+
+.contact{
+    width: 40%;
+    padding-right: 50px;
+}
+
+
+.light-font{
+    color: #f2f2f2;
+}
+.darkgray{
+    color: #a2a39c;
+}
+
+.content-font{
+    font-size: 14px;
+    font-family: monospace;
+  
+} 
+
+#portfolio-header{
+    display: flex;
+    padding: 10px;
+    background-color:#1a1a1a;
+}
+
+
+h4{
+    font-size: 18pt;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    display: inline;
+    width: 85%;
+}
+
+#project-list{
+    display: flex;
+    margin-bottom: 20px;
+    background-color:#1a1a1a;
+}
+
+.projects{
+    width: 22%;
+}
+
+.back-to-top{
+    text-align: right;
+    width: 100%;
+    color: #5a6469;
+    margin-right: 30px;
+    
+}

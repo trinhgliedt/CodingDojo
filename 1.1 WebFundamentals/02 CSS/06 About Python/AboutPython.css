@@ -1,0 +1,206 @@
+*{
+    /* border: 1px solid gray; */
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+ 
+}
+
+#container{
+    width: 970px;
+    min-height: 600px;
+    background-color: #245076;
+    margin: 0 auto;
+    padding: 8px 0px 0 0;
+    outline: 1px solid rgb(199, 195, 195);
+    
+}
+    /*Child 1 of container*/
+
+    header{ /*Child 1 of container */
+        display: flex;
+    }
+
+         img{  /*Child 1 of header: Python logo */
+            width: 35%;
+            margin-left: 25px;
+            margin-right: 250px;
+            display: inline-block;
+        }
+
+        .toprightbox{  /*Child 2 of header */
+            width: 37%;
+            margin-right: 18px;
+        }
+
+            .text-size{ /*Child 1 of TopRightBox: Text size Normal Large */
+                text-align: right;
+                margin-right: 35px;
+                margin-bottom: 5px;
+            }
+
+                #form-container{ /* Child 2 of TopRightBox: Container for search box and button */
+                    text-align: right;
+                    background-color: #444444;
+                    border-radius: 10px;
+                    padding: 10px 35px;
+                    box-shadow: inset -2px -2px black;
+                    
+                    
+                    
+
+                }
+                form{ /*Child 1 of section of TopRightBox */
+                    display: inline-block;
+                    
+                    }    
+                        form input{ /*Search box */
+                            height: 30px;
+                            width: 180px;
+                            text-align: center;
+                            border-bottom: 2px solid #bebebe;
+                            border-right: 2px solid #bebebe;
+                            border-top: 2px solid #6c6c6c;
+                            border-left: 2px solid #6c6c6c;
+                            
+                        }
+                .go{ /*GO button: Child 2 of section of TopRightBox*/
+                    background-color: #245076;
+                    color: white;
+                    text-decoration: none;
+                    font-size: 10pt;
+                    padding: 8px;
+                    border-radius: 5px;
+                    border-top: 2px solid #bebebe;
+                    border-left: 2px solid #bebebe;
+                    border-bottom: 2px solid #6c6c6c;
+                    border-right: 2px solid #6c6c6c;
+                }
+    /*Child 2 of container*/
+        .menu-bar{ /*Child 1 of Child 2 of container: Menu Bar*/
+            margin: 20px 45px 20px 85px;
+            background: linear-gradient(180deg,#3474ab, #487fad);
+            font-size: 15pt;
+            border-radius: 7px;
+            box-shadow: 2px 2px black;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+        #main-sec-1{
+            display: flex;
+        }
+
+
+ul {
+    
+    text-align: center;
+    list-style-type: square;
+    width: 300px;
+    display: block;
+
+}
+
+
+
+
+ul.a {
+    list-style-position: inside;
+    text-align: center;
+    width: 300px;
+    display: block;
+    list-style: none;
+    color: white;
+}
+
+
+ul.a li::before {
+    content: ">>"; 
+    font-size: 6pt;
+    color: #e3c338; 
+    font-weight: bold; 
+    display: inline-block; 
+    width: 2em; 
+    margin-left: -2em; 
+  }
+
+  /* ul li li{
+    list-style: square;
+  } */
+  /* ul li li::before {
+    content: "\25AA"; 
+    font-size: 6pt;
+    color:black; 
+    font-weight: bold; 
+    display: inline-block; 
+    width: 2em; 
+    margin-left: -2em; 
+  } */
+
+.upper-right-sec{
+    width: 75%;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-right: 60px;
+    
+}
+
+.white-font{
+    color: white;
+}
+
+.yellow-font{
+    color: #ddc10e;
+}
+.blue-font{
+    color:#acb7d4;
+}
+.no-underline{
+    text-decoration: none;
+}
+
+
+
+.small-font{
+    font-size:11pt;
+}
+
+.large-margin{
+    margin: 5px 0;;
+}
+.white-box{
+    background-color: white;
+    display: flex;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.top-white-box{
+    width: 35%;
+    padding: 10px 50px 10px 20px;
+    border-top: 5px solid #73a7d5;
+    margin: 5px -55px 0px 80px;
+}
+.bottom-white-box{
+    width: 300px;
+}
+
+.large-font{
+    font-size: 15pt;
+    font-style: italic;
+}
+
+footer{
+    background: linear-gradient(180deg, #25537a, #3374ab);
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.d{
+    padding: 40px 10px 15px 10px;
+    
+}
+.c{
+    font-size: 8pt;
+}
+
