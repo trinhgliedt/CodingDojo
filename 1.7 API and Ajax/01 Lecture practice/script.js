@@ -8,7 +8,7 @@ $(document).ready(function(){
         url: "https://pokeapi.co/api/v2/pokemon/pikachu",
       }).done(function(pokemonObj) {
         console.log(pokemonObj);
-        // console.log(pokemonObj.sprites.front_default);
+        console.log(pokemonObj.sprites.front_default);
         var box = $("<div id='pokeBox'><img src='"+pokemonObj.sprites.front_default+"'></div>")
         var name = "<h3> " + pokemonObj.name + "</h3>"
         // "<h3>Charmander</h3>"
