@@ -267,4 +267,84 @@ function stringReverse(str) {
   
 //   console.log(stringReverse('this')); // should log 'siht'
 //   console.log(stringReverse('something')); // should log 'gnihtemos'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# //   8/4/2020
+# /**
+#  * #1
+#  * param {String} str
+#  * return {Boolean} Are the parentheses valid?
+#  */
+function parensValid(str) {
+     var count = 0;
+
+        
+    for (var i=0; i<str.length; i++){
+
+        if (str[i] == "("){
+            count = count + 1;
+            
+        }
+        else if (str[i] == ")"){
+            count = count - 1;         
+        }
+        if (count < 0){return false;}
+        }
+    console.log(count);
+    return (count===0);    
+    }
   
+    
+  console.log(parensValid('(()))')); // should log false
+  console.log(parensValid('((some)a)')); // should log true
+  console.log(parensValid(')(')); // should log false
+  console.log(parensValid('()()')); // should log true
+  
+  
+// #2: 
+
+   /**
+#    * param {String} str
+#    * return {Boolean} Are the braces valid?
+#    */
+
+  function bracesValid(str){
+
+    var open_braces = [];
+    for(var i = 0; i < str.length; i++){
+        if(str[i] == '(' || str[i] == '{' || str[i] == '['){
+            open_braces.push(str[i]);
+        }
+        else if(str[i] == ')' || str[i] == '}' || str[i] == ']'){
+            if((str[i] == ')' && open_braces[open_braces.length-1] == '(')
+            || (str[i] == ']' && open_braces[open_braces.length-1] == '[')
+            || (str[i] == '}' && open_braces[open_braces.length-1] == '{')){
+                open_braces.pop();
+            }
+            else{
+                return false;
+            }
+        }
+    }
+    return open_braces.length == 0;
+}
+
+
+console.log(bracesValid('{[()]}')); // should log true
+console.log(bracesValid('{[()}]')); // should log false
+console.log(bracesValid('{[a()b]c}')); // should log true
+console.log(bracesValid('{}[]()[(])')); // should log false
