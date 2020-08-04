@@ -22,8 +22,16 @@ food1 = "sushi"
 food2 = "pizza"
 print("I love to eat {} and {}.".format(food1,food2))
 print("I love to eat %s and %s."%(food1,food2))
-print(f"I love to eat {food1} and {food2}.")
-      
+print(f"I love to eat {food1} and {food2}.")  
 
 
-      
+x = 10
+if x > 50:
+    print("bigger than 50")
+else:
+    print("smaller than 50")
+
+class EmptyClass:
+    
+for val in my_string:
+    pass
