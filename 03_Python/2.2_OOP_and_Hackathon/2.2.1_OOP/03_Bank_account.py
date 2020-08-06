@@ -9,7 +9,7 @@ class BankAccount:
         self.account_balance = balance
         self.interest_rate = int_rate
     def __str__(self):
-        output_str = f"Account: {self.account_name}; Account balance: {self.account_balance}; Interest rate: {interest_rate}"
+        output_str = f"Account: {self.account_name}; Account balance: {self.account_balance}; Interest rate: {self.interest_rate}"
         return output_str
     # Add a deposit method to the BankAccount class
     def deposit(self, amount):

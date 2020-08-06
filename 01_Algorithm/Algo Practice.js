@@ -348,3 +348,97 @@ console.log(bracesValid('{[()]}')); // should log true
 console.log(bracesValid('{[()}]')); // should log false
 console.log(bracesValid('{[a()b]c}')); // should log true
 console.log(bracesValid('{}[]()[(])')); // should log false
+
+//8/5/20
+//Trinh's group: Trinh, Quinn, Bryce
+function isPalindrome(str) {
+    var check = false;
+    for (var i = 0; i <= str.length / 2; i++) {
+        if (str[i] === str[str.length - 1 - i]) {
+            check = true;
+        }
+        else {
+            check = false;
+        }
+    }
+    return check;
+}
+console.log(isPalindrome('mom')); // should log true
+console.log(isPalindrome('Mom')); // should log false
+console.log(isPalindrome('this')); // should log false
+console.log(isPalindrome('mooom')); // should log true
+
+//Nick Krauss's group
+var BackwardsString = "";
+
+
+    for (var i = str.length-1; i >= 0; i--){
+      BackwardsString += str[i];
+      console.log(BackwardsString);
+
+    }
+    return BackwardsString === str
+
+  
+  console.log(isPalindrome('mom')); // should log true
+  console.log(isPalindrome('Mom')); // should log false
+  console.log(isPalindrome('this')); // should log false
+  console.log(isPalindrome('mooom')); // should log true
+
+
+
+//Morley's solution: 
+function isPalindrome(str) {
+    for(var back = 0, front = str.length - 1; back < front; back++, front--) {
+        if(str[back] !== str[front]) {
+        return false;
+        }
+    }
+}
+console.log(isPalindrome('mom')); // should log true
+console.log(isPalindrome('Mom')); // should log false
+console.log(isPalindrome('this')); // should log false
+console.log(isPalindrome('mooom')); // should log true
+
+//Morley's solution: with my modifications
+function isPalindrome(str) {
+    for(var back = 0, front = str.length - 1; back <= front; back++, front--) {
+        console.log("back: ",back, "front: ",front)
+        console.log("Before if: back: ",str[back], "front: ", str[front])
+        if(str[back] !== str[front]) {
+          console.log("back: ",str[back], "front: ", str[front])
+          return false;
+        }
+        else {return true;}
+        
+        // return
+    }
+}
+console.log(isPalindrome('mom')); // should log true
+console.log(isPalindrome('Mom')); // should log false
+console.log(isPalindrome('this')); // should log false
+console.log(isPalindrome('mooom')); // should log true
+
+
+
+//Longest palindrome: howard
+function longestPalindrome(str) {
+    var prevPalindrome = currPalindrome = '';
+    // i sets lower bound of the string
+    for(var i = 0; i < str.length; i++){
+        // j sets the upper bound of the string
+        for(var j = str.length; j >= i; j--){
+            if(isPalindrome(str.slice(i,j))){
+                if(prevPalindrome.length < str.slice(i,j).length){
+                    prevPalindrome = str.slice(i,j);
+                }
+                break;
+            }
+        }
+    }
+    return prevPalindrome;
+  }
+  console.log(longestPalindrome('this')); // should log 't'
+  console.log(longestPalindrome('bobe')); // should log 'bob'
+  console.log(longestPalindrome('what up, daddy-o?')); // should log 'dad'
+  console.log(longestPalindrome('Yikes! my favorite racecar erupted!'));  // should log 'e racecar e'

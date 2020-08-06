@@ -1,92 +1,67 @@
-
-  
-
-
-
-
-# //   8/4/2020
-# /**
-#  * #1
-#  * param {String} str
-#  * return {Boolean} Are the parentheses valid?
-#  */
-function parensValid(str) {
-     var count = 0;
-
-        
-    for (var i=0; i<str.length; i++){
-
-        if (str[i] == "("){
-            count = count + 1;
-            
+function isPalindrome(str) {
+    var check = false;
+    for (var i = 0; i <= str.length / 2; i++) {
+        if (str[i] === str[str.length - 1 - i]) {
+            check = true;
         }
-        else if (str[i] == ")"){
-            count = count - 1;         
+        else {
+            check = false;
         }
-        if (count < 0){return false;}
-        }
-    console.log(count);
-    return (count===0);    
     }
-  
-  console.log(parensValid('(()))')); // should log false
-  console.log(parensValid('((some)a)')); // should log true
-  console.log(parensValid(')(')); // should log false
-  console.log(parensValid('()()')); // should log true
-  
-  
-  
-#   /**
-#    * @param {String} str
-#    * @return {Boolean} Are the braces valid?
-#    */
-  
-  function bracesValid(str) {
-    var count = 0, count1 = 0, count2 = 0;
-    var symbol="";
-    if (str[0] == ")" || str[0] == "}" || str[0] == "]"){
-        return 'False';
+    return check;
+}
+console.log(isPalindrome('mom')); // should log true
+console.log(isPalindrome('Mom')); // should log false
+console.log(isPalindrome('this')); // should log false
+console.log(isPalindrome('mooom')); // should log true
+
+//Nick Krauss's group
+var BackwardsString = "";
+
+
+    for (var i = str.length-1; i >= 0; i--){
+      BackwardsString += str[i];
+      console.log(BackwardsString);
+
     }
-    for (var i=0; i<str.length; i++){
-            if (str[i] == "("){
-                count = count + 1;
-                symbol= symbol +"(";
-            }
-            if (str[i] == ")"){
-                count = count - 1;
-                symbol= symbol + ")";
-            }
-           if (str[i] == "["){
-                count1 = count1 + 1;
-                symbol= symbol + "[";
-            }
-            if (str[i] == "]"){
-                count1 = count1 - 1;
-                symbol= symbol + "]";
-            }
-            if (str[i] == "{"){
-                count2 = count2 + 1;
-                symbol= symbol + "{";
-            }
-            if (str[i] == "}"){
-                count2 = count2 - 1;
-                symbol= symbol + "}";
-            }
-    }
-    for (var j=0; j<symbol.length-1; j++) {
-        if ((symbol[j]+symbol[j+1] == "[(" || symbol[j]+symbol[j+1] == "([" || symbol[j]+symbol[j+1] == "({" || symbol[j]+symbol[j+1] == "{(") 
-        && (count1 == 0 && count2 ==0 && count == 0)){
-            return "False";
-        }
-        else{
-            return "True";
-        }
-        
+    return BackwardsString === str
+
+  }
+  console.log(isPalindrome('mom')); // should log true
+  console.log(isPalindrome('Mom')); // should log false
+  console.log(isPalindrome('this')); // should log false
+  console.log(isPalindrome('mooom')); // should log true
+
+
+
+//Morley's solution: 
+for(var back = 0, front = str.length - 1; back < front; back++, front--) {
+    if(str[back] !== str[front]) {
+      return false;
     }
   }
-  
-  
-  console.log(bracesValid('{[()]}')); // should log true
-  console.log(bracesValid('{[()}]')); // should log false
-  console.log(bracesValid('{[a()b]c}')); // should log true
-  console.log(bracesValid('{}[]()[(])')); // should log false
+console.log(isPalindrome('mom')); // should log true
+console.log(isPalindrome('Mom')); // should log false
+console.log(isPalindrome('this')); // should log false
+console.log(isPalindrome('mooom')); // should log true
+
+function isPalindrome(str) {
+    // compare 2 string together
+      var reversed = "";
+      for (var i = str.length - 1; i >= 0; i--){        
+          reversed += str[i];
+      }
+      if(reversed == str){
+            return true; 
+      }
+      else{
+        return false;
+      }
+  }  
+
+    console.log(isPalindrome('mom')); // should log true
+    console.log(isPalindrome('Mom')); // should log false
+    console.log(isPalindrome('this')); // should log false
+    console.log(isPalindrome('mooom')); // should log true
+
+   
