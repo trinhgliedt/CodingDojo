@@ -1,67 +1,57 @@
-function isPalindrome(str) {
-    var check = false;
-    for (var i = 0; i <= str.length / 2; i++) {
-        if (str[i] === str[str.length - 1 - i]) {
-            check = true;
-        }
-        else {
-            check = false;
-        }
+ //8/10/2020
+    /**
+ * takes in a string
+ * returns an object
+ * with characters as keys
+ * and the number of occurrences as values
+ * 
+ * how to determine if property is in object:
+ * var obj = { someProp: 'some val' }
+ * obj.hasOwnProperty('someProp') returns true
+ */
+
+// set a key/value pair
+obj['secondKey'] = 'second val'
+
+// get a value from an object
+obj['secondKey'] // returns 'second val'
+
+function freqTable(str) {
+  var obj = {};
+  for (var i in str) {
+    var character = str[i];
+    if (obj.hasOwnProperty(character)) {
+      obj[character]++;
     }
-    return check;
+    else {
+      obj[character] = 1;
+    }
+  }
+  return obj;
 }
-console.log(isPalindrome('mom')); // should log true
-console.log(isPalindrome('Mom')); // should log false
-console.log(isPalindrome('this')); // should log false
-console.log(isPalindrome('mooom')); // should log true
+console.log(freqTable('abac'));
 
-//Nick Krauss's group
-var BackwardsString = "";
+console.log(freqTable('abac')); // logs { a: 2, b: 1, c: 1 }
+//                     0123
+console.log(freqTable('deffd')); // logs { d: 2, e: 1, f: 2 }
 
 
-    for (var i = str.length-1; i >= 0; i--){
-      BackwardsString += str[i];
-      console.log(BackwardsString);
+/**
+ * takes in a string
+ * returns a string
+ * with the "words" reversed
+ */
 
-    }
-    return BackwardsString === str
-
+function reverseWordOrder(str) {
+  var arr = str.split(" "); //--> ['This', 'is', 'a' ,'test']
+  var newStr = "";
+  for (var i = arr.length - 1; i>0; i--){
+    newStr += arr[i] + " ";
   }
-  console.log(isPalindrome('mom')); // should log true
-  console.log(isPalindrome('Mom')); // should log false
-  console.log(isPalindrome('this')); // should log false
-  console.log(isPalindrome('mooom')); // should log true
-
-
-
-//Morley's solution: 
-for(var back = 0, front = str.length - 1; back < front; back++, front--) {
-    if(str[back] !== str[front]) {
-      return false;
-    }
+  return newStr + arr[0];
   }
-console.log(isPalindrome('mom')); // should log true
-console.log(isPalindrome('Mom')); // should log false
-console.log(isPalindrome('this')); // should log false
-console.log(isPalindrome('mooom')); // should log true
-
-function isPalindrome(str) {
-    // compare 2 string together
-      var reversed = "";
-      for (var i = str.length - 1; i >= 0; i--){        
-          reversed += str[i];
-      }
-      if(reversed == str){
-            return true; 
-      }
-      else{
-        return false;
-      }
-  }  
-
-    console.log(isPalindrome('mom')); // should log true
-    console.log(isPalindrome('Mom')); // should log false
-    console.log(isPalindrome('this')); // should log false
-    console.log(isPalindrome('mooom')); // should log true
-
-   
+  
+  console.log(reverseWordOrder('this statement'));
+  // should log 'statement this'
+  console.log(reverseWordOrder('This is a test'));
+  // should log 'test a is This'

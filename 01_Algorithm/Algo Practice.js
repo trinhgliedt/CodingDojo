@@ -442,3 +442,316 @@ function longestPalindrome(str) {
   console.log(longestPalindrome('bobe')); // should log 'bob'
   console.log(longestPalindrome('what up, daddy-o?')); // should log 'dad'
   console.log(longestPalindrome('Yikes! my favorite racecar erupted!'));  // should log 'e racecar e'
+
+// 8/6/2020 morning
+// Book Index: Write a function that given a sorted array of page
+// numbers, return a string representing a book
+// index. Combine consecutive pages to create
+// ranges. Given [1, 3, 4, 5, 7, 8, 10] ,
+// return the string "1, 3-5, 7-8, 10" .
+
+
+function join(arr, separator){
+    var str = "";
+    for (var i = 0; i<arr.length-1; i++){
+      str += arr[i] + separator;
+    }
+    str += arr[arr.length-1];
+    return str;
+  }
+  var myArr = ["a", "b", "c", "d"]; 
+  mySep = " - ";
+  console.log(join(myArr, mySep)); //should log "a - b - c - d"
+  
+  
+  function bookIndex(arr){
+    // find the gap between indexes
+    var gapArr =[], gap=0;
+    for (var i=0; i<arr.length-1; i++){
+      gap = arr[i+1] - arr[i];
+      gapArr.push(gap);
+    }
+    // console.log(gapArr); // gapArr = [2, 1, 1, 2, 1, 2]
+    
+    for (var i=0; i<gapArr.length; i++){
+      if (gapArr[i] == 1){
+        gapArr[i] ="M";
+      }
+      else {gapArr[i] ="B";}
+      // console.log(gapArr);
+    }
+    var arrBMark =[];
+    for (var i=0, j=0;  i<arr.length-1, j<gapArr.length; i++, j++){
+      arrBMark.push(arr[i]);
+      arrBMark.push(gapArr[j]);
+    }
+    arrBMark.push(arr[arr.length-1]);
+    // console.log(arrBMark); // arrBMark = [1, B, 3, M, 4, M, 5, B, 7, M, 8, B, 10]; 
+  var begArr=[], endArr=[], endResult="";
+  // console.log("endResult: ",endResult);
+  for (var i=1; i<arrBMark.length-2; i = i + 2){
+      if (arrBMark[i] == "B"){
+        endResult += arrBMark[i-1]; // end of last range , loop 1: endResult = "1", loop 2: endResult = "1, 3-5", "1, 3-5, 7-8"
+        endResult += ", ";                  //endResult = "1, ", loop 2: endResult = "1, 3-5, " , "1, 3-5, 7-8, "
+        endResult += arrBMark[i+1]; // beginning osf new range endResult = "1, 3", loop 2: endResult = "1, 3-5, 7", "1, 3-5, 7-8, 10"
+        endResult += "-";              // = "1, 3-", "1, 3-5, 7-", "1, 3-5, 7-8, 10-"
+        // console.log("loop ",i, "result: ",endResult);
+      }
+  }
+  endResult += arrBMark[arrBMark.length-1];
+  // console.log(endResult);
+  return endResult;
+  }
+  
+  var myArr = [1, 3, 4, 5, 7, 8, 10]; //arr length = 7
+  //             2  1  1  2  1  2 //gapArr length = 6
+  //             B  M  M  B  M  B
+  // output = "1, 3-5, 7-8, 10"
+  // arrBMark = [1, B, 3, M, 4, M, 5, B, 7, M, 8, B, 10]; 
+  //             0  1  2  3  4  5  6  7  8  9  10 11  12 , length of this is 13
+  var myArr2 = [5, 10, 11, 12];
+  var myArr3 = [5, 10, 11, 12, 15, 16, 18, 20, 25, 26];
+  console.log(bookIndex(myArr));
+  console.log(bookIndex(myArr2));
+  console.log(bookIndex(myArr3));
+
+  //Howard's group:
+
+  function bookIndex(arr) {
+    var myStr = "";
+    var firstnum = arr[0];
+    var lastnum;
+    for(var i = 0; i < arr.length; i++){
+        // if it is not consecutive, (top end of range becomes current index)
+        if (!(arr[i] + 1 == arr[i+1])){
+            lastnum = arr[i];
+            // This if statement is for checking for last element (don't add ", " at the end)
+            if(i == arr.length -1){
+                // Checks for cases where "-" is not needed. i.e. [5,10,12] -> logs "5, 10, 12"
+                if(firstnum == lastnum){
+                    myStr += firstnum;
+                }
+                // Else, "-" added to consecutive set of numbers
+                else{
+                    myStr += firstnum + "-" + lastnum;
+                    firstnum = arr[i + 1];
+                }
+            }
+            // separates the strings, rather than first index/last index.
+            else{
+                // Checks if the index is single, non-consecutive.
+                if(firstnum == lastnum){
+                    myStr += firstnum + ", "
+                    firstnum = arr[i + 1];
+                }
+                // Else, "-" added to consecutive set of numbers
+                else{
+                    myStr += firstnum + "-" + lastnum + ", ";
+                    firstnum = arr[i + 1];
+                }
+            }
+
+        }
+    }
+    return myStr
+  }
+
+  console.log(bookIndex([1, 2, 3, 5, 6, 7, 10, 11]));
+  console.log(bookIndex([5, 10, 11, 12]));
+  
+
+
+//   Common Suffix
+// When given an array of words, returns the largest
+// suffix (word-end) that is common between all
+// words. For example, for input ["ovation",
+// "notation", "action"] , return "tion" .
+// Given ["nice", "ice", "sic"] , return ""
+
+
+
+function commonSuffix(arr){
+    var endP ="", shortestIndexLength = [arr[0].length];
+    for (var i=0; i<arr.length; i++){
+      if (shortestIndexLength > [arr[i].length]){
+        shortestIndexLength = [arr[i].length];
+      }
+    }
+    console.log("shortest array index: ",shortestIndexLength);
+    
+    for (var j=0; j<shortestIndexLength-1; j++){
+      // console.log("Beg of loop j:");
+      // get the last character of each of the array value
+      var suffix = "";
+      for (var i=0; i<arr.length; i++){ // looping through each index of the given array
+        // suffix = ""; //to empty out the suffix at the beginning of each loop
+        // console.log("Beg of loop i:");
+        suffix += arr[i][arr[i].length -1-j]; //adding the last character of ech index value to a string called suffix
+        // console.log("Array index ",i,"; Suffix inside loop i: ",suffix);
+      }
+      // if all characters are the same, we should have a string with all same characters * number of array indexes
+        // console.log("Suffix before trimming: ",suffix); //nnn, length = 3
+        //                                012
+      //compare if the last characters are the same:
+        var check = false;
+        for (var k=0; k<suffix.length-1; k++){
+          if (suffix[k] == suffix[k+1]){
+            check = true
+          } 
+          else  {check = false;}
+        }
+        // console.log("are all characters in suffix the same? ",check);
+console.log(commonSuffix(myArr2));        if (check == true){
+          suffix = suffix[0];
+          endP += suffix;
+          
+          }
+        suffix = ""; // to empty out suffix for next use
+        // console.log("Suffix after trimming: ",suffix);
+        // console.log("End product: ",endP);
+    }
+    // now we need to reverse end product:
+    var endP2 = "";
+    for (var i=endP.length-1; i>=0; i--){
+      endP2 += endP[i];
+    }
+    console.log("End product: ",endP2);
+    return endP2; 
+}
+var myArr1= ["ovation","notation", "action"];
+// loop from end of each index, get out the last character (len -1). Compare the last character of these indexes. If they are the same, store that in to suffix and continue.
+
+//   Compare the second to last character of these indexes (len - 2). store that in to suffix and continue.
+
+var myArr2= ["nice", "ice", "sic"];
+console.log(commonSuffix(myArr1));
+
+
+
+//8/7/2020
+function invertHash(obj) {
+
+    var newObj={};
+    for (var key in obj){
+      // console.log("Loop ",key);
+      // var temp = key;
+      // var temp1 = obj[key];
+      // // console.log("temp (old key):",temp);
+      // newObj[temp1]] = temp;
+      newObj[obj[key]] = key;
+      // console.log("new key: ",key);
+      
+      // console.log("new value: ",obj[key]);
+      // console.log(obj);
+      // console.log(newObj);
+    }
+    return newObj;
+  }
+  
+  // var person={"name": "Ani", "gender": "female"};
+  // console.log(person["name"]);
+  
+  
+  console.log(invertHash({ someKey: 'someVal' })); // should log { someVal: 'someKey' }
+  console.log(invertHash({
+    key1: 'val1',
+    key2: 'val2'
+  })); // should log { val1: 'key1', val2: 'key2' }
+  
+  function invertHash(obj) {
+    var newObj={};
+    for (var key in obj){
+      newObj[obj[key]] = key;
+    }
+    return newObj;
+  }
+  console.log(invertHash({ someKey: 'someVal' })); // should log { someVal: 'someKey' }
+  console.log(invertHash({
+    key1: 'val1',
+    key2: 'val2'
+  })); // should log { val1: 'key1', val2: 'key2' }
+  
+  
+  /**
+     * param {Array<String>} arr1 array of strings
+     * param {Array<String>} arr2 array of strings
+     * return {Object}
+     * with the elements from the first as keys
+     * and the elements from the second as values
+     * 
+     * NOTE: the two arrays are of equal length
+     */
+    //arr1: key
+    //arr2: value
+    function zipArraysIntoMap(arr1, arr2) {
+      var newObj={};
+      for (var i=0; i<arr1.length; i++){
+        newObj[arr1[i]] = arr2[i];
+      }
+      return newObj;
+    }
+    
+    console.log(
+      zipArraysIntoMap(
+        ['some', 'thing'], ['other', 'stuff']
+      )
+    );
+    // should log { some: 'other', thing: 'stuff' }
+
+    //8/10/2020
+    /**
+ * takes in a string
+ * returns an object
+ * with characters as keys
+ * and the number of occurrences as values
+ * 
+ * how to determine if property is in object:
+ * var obj = { someProp: 'some val' }
+ * obj.hasOwnProperty('someProp') returns true
+ */
+
+// set a key/value pair
+obj['secondKey'] = 'second val'
+
+// get a value from an object
+obj['secondKey'] // returns 'second val'
+
+function freqTable(str) {
+  var obj = {};
+  for (var i in str) {
+    var character = str[i];
+    if (obj.hasOwnProperty(character)) {
+      obj[character]++;
+    }
+    else {
+      obj[character] = 1;
+    }
+  }
+  return obj;
+}
+console.log(freqTable('abac'));
+
+console.log(freqTable('abac')); // logs { a: 2, b: 1, c: 1 }
+//                     0123
+console.log(freqTable('deffd')); // logs { d: 2, e: 1, f: 2 }
+
+
+/**
+ * takes in a string
+ * returns a string
+ * with the "words" reversed
+ */
+
+function reverseWordOrder(str) {
+  var arr = str.split(" "); //--> ['This', 'is', 'a' ,'test']
+  var newStr = "";
+  for (var i = arr.length - 1; i>0; i--){
+    newStr += arr[i] + " ";
+  }
+  return newStr + arr[0];
+  }
+  
+  console.log(reverseWordOrder('this statement'));
+  // should log 'statement this'
+  console.log(reverseWordOrder('This is a test'));
+  // should log 'test a is This'

@@ -97,10 +97,7 @@ iterateDictionary2('last_name', students)
 # prints the name of each key along with the size of its list, and then prints 
 # the associated values within each key's list. For example:
 
-dojo = {
-   'locations': ['San Jose', 'Seattle', 'Dallas', 'Chicago', 'Tulsa', 'DC', 'Burbank'],
-   'instructors': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
-}
+
 def printInfo(some_dict):
     print(f"{len(some_dict['locations'])} LOCATIONS ")
     for i in range (len(some_dict['locations'])):
@@ -108,6 +105,10 @@ def printInfo(some_dict):
     print(f"{len(some_dict['instructors'])} INSTRUCTORS ")
     for j in range (len(some_dict['instructors'])):
         print(some_dict['instructors'][j])
+dojo = {
+   'locations': ['San Jose', 'Seattle', 'Dallas', 'Chicago', 'Tulsa', 'DC', 'Burbank'],
+   'instructors': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
+}
 printInfo(dojo)
 
 # # output:
