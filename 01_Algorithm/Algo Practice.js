@@ -755,3 +755,111 @@ function reverseWordOrder(str) {
   // should log 'statement this'
   console.log(reverseWordOrder('This is a test'));
   // should log 'test a is This'
+
+  //8/11/2020
+  /**
+ * param {String} str
+ * return {String} with only the last instance of each character
+ * NOTE: the character order should be preserved
+ */
+
+function dedupe(str) {
+  var tempStr ="";
+  for (var i=str.length-1; i>=0; i--){
+    if (tempStr.includes(str[i]) == false){
+      tempStr += str[i];
+    }
+  } 
+  tempStr2="";
+  for (var j=tempStr.length-1; j>=0; j--){
+    tempStr2 += tempStr[j];
+  }
+  return tempStr2;
+  }
+  
+  console.log(dedupe('abac')); // should log 'bac'
+  console.log(dedupe('Snaps! crackles! pops!')); // should log 'Snrackle ops!'
+
+  function dedupe(str){
+    var newObj = {};
+    var newStr = "";
+    for (var i = str.length - 1; i >= 0; i--){
+        var character = str[i];
+        if (newObj.hasOwnProperty(character) == false){
+            newObj[character] = true;
+            newStr = character + newStr;
+        }
+    }
+    return newStr;
+}
+
+console.log(dedupe('abac')); // should log 'bac'
+console.log(dedupe('Snaps! crackles! pops!'));
+// should log 'Snrackle ops!
+
+
+/**
+ * param {String} str
+ * return {String} with individual "words" reversed
+ */
+
+function reverseWords(str) {
+  // your code here
+}
+
+console.log(reverseWords("hello")); // should log 'olleh'
+console.log(reverseWords('this that')); // should log 'siht taht'
+
+//8/12/20
+/**
+ * param {String} str
+ * return {String} with the original "compressed"
+ * if the "compressed" version IS NOT shorter,
+ * return the original
+ */
+
+function encode(str) {
+  // your code here
+}
+
+console.log(encode('aabbbbbb')); // should log 'a2b6'
+console.log(encode('abbbbbbbbbb')); // should log 'a1b10'
+console.log(encode('abbbaa')); // should log 'abbbaa'
+console.log(encode('abc')); // should log 'abc'
+
+
+/**
+ * param {String} str
+ * return {String} with the original "expanded"
+ * 
+ * parseInt('a') returns NaN
+ * parseInt('5') returns 5
+ * isNaN('c') returns true
+ * isNaN(5) returns false
+ */
+
+function decode(str) {
+  var newStr="", freStr="", fre=0, prevChar = str[0];
+  for (var i = 1; i<=str.length; i++){
+    if (isNaN(str[i])){
+      for(var j = 0; j < parseInt(freStr); j++){
+          newStr +=  prevChar;
+      }
+      prevChar = str[i];
+      freStr="";
+    }
+    else {
+      freStr += str[i];
+    }
+  }
+
+  return newStr;
+}
+
+console.log(decode('a2b6')); // should log 'aabbbbbb'
+console.log(decode('a10b10')); // should log 'abbbbbbbbbb'
+// loop 1: newStr = a
+// loop 2: newStr = a, freStr="1"
+// loop 3: newStr = a, freStr="10"
+// loop 4: freStr="10", fre=10, 
+console.log(decode('a1b10c6')); // should log 'abbbbbbbbbbcccccc'

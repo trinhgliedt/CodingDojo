@@ -1,0 +1,88 @@
+* {
+    /* outline: 1px solid grey; */
+    
+    
+}
+
+#container {
+    width: 700px;
+    /* background-color: blue; */
+}
+h2{
+    width: 48%;
+    text-align: center;
+    display: inline-block;
+}
+table{
+    margin: 20px 0;
+    /* width: 70%; */
+}
+
+td {
+    /* outline: 1px solid grey; */
+    padding: 2px 0;
+    width: 100px;
+}
+
+
+button {
+    box-shadow: 3px 3px black;
+    
+}
+
+.sideBox {
+    width: 48%;
+    display: inline-block;
+    margin: 0px 0px;
+
+}
+form {
+    width: 70%;
+    padding-left: 60px;
+    
+}
+
+input {
+    width: 100px;
+}
+
+option {
+    width: 100px;
+}
+
+label {
+    width: 100px;
+    margin-left: 15px;
+}
+
+#bottomBox{
+    border-top: 2px solid black;
+    margin: 0 10px;
+    width: 80%;
+    min-height: 500px;
+    /* padding-left: 150px; */
+}
+#bottomBox h2{
+    width: 100%;
+}
+
+#bottomBox p, ul{
+    /* display: inline-block; */
+    margin: 5px 0px 0px 120px;
+    /* width: 25%; */
+}
+
+#bottomBox ul {
+    display: inline-block;
+    width: 25%;
+}
+
+#bottomBox p {
+    display: inline-block;
+    width: 45%;
+}
+
+#bottomBox p {
+   font-weight: bold;
+    
+}

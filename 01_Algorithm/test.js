@@ -1,57 +1,72 @@
- //8/10/2020
-    /**
- * takes in a string
- * returns an object
- * with characters as keys
- * and the number of occurrences as values
- * 
- * how to determine if property is in object:
- * var obj = { someProp: 'some val' }
- * obj.hasOwnProperty('someProp') returns true
+//8/12/20
+/**
+ * param {String} str
+ * return {String} with the original "compressed"
+ * if the "compressed" version IS NOT shorter,
+ * return the original
  */
 
-// set a key/value pair
-obj['secondKey'] = 'second val'
-
-// get a value from an object
-obj['secondKey'] // returns 'second val'
-
-function freqTable(str) {
-  var obj = {};
-  for (var i in str) {
-    var character = str[i];
-    if (obj.hasOwnProperty(character)) {
-      obj[character]++;
-    }
-    else {
-      obj[character] = 1;
+function encode(str) {
+  // your code here
+  var output = '';
+  var count = 0;
+  for (var i = 0; i < str.length; i++){
+    count++;
+    if (str[i] != str[i+1]) {
+      output += str[i] + count;
+      count = 0;
     }
   }
-  return obj;
+  if (output.length < str.length){
+    return output;
+  }
+  return str;
 }
-console.log(freqTable('abac'));
 
-console.log(freqTable('abac')); // logs { a: 2, b: 1, c: 1 }
-//                     0123
-console.log(freqTable('deffd')); // logs { d: 2, e: 1, f: 2 }
+//   str = 'abbbaa'
+//   myStr = 'a1b3a2'
+//   compare str.length vs myStr.length
+//   myObj ={
+//     'a': 0,
+//     'b': 0
+//   }
+console.log(encode('aabbbbbb')); // should log 'a2b6'
+console.log(encode('abbbbbbbbbb')); // should log 'a1b10'
+console.log(encode('abbbaa')); // should log 'abbbaa' rather 
 
 
 /**
- * takes in a string
- * returns a string
- * with the "words" reversed
+ * param {String} str
+ * return {String} with the original "expanded"
+ * 
+ * parseInt('a') returns NaN
+ * parseInt('5') returns 5
+ * isNaN('c') returns true
+ * isNaN(5) returns false
  */
 
-function reverseWordOrder(str) {
-  var arr = str.split(" "); //--> ['This', 'is', 'a' ,'test']
-  var newStr = "";
-  for (var i = arr.length - 1; i>0; i--){
-    newStr += arr[i] + " ";
+function decode(str) {
+  var newStr="", freStr="", fre=0, prevChar = str[0];
+  for (var i = 1; i<=str.length; i++){
+    if (isNaN(str[i])){
+      for(var j = 0; j < parseInt(freStr); j++){
+          newStr +=  prevChar;
+      }
+      prevChar = str[i];
+      freStr="";
+    }
+    else {
+      freStr += str[i];
+    }
   }
-  return newStr + arr[0];
-  }
-  
-  console.log(reverseWordOrder('this statement'));
-  // should log 'statement this'
-  console.log(reverseWordOrder('This is a test'));
-  // should log 'test a is This'
+
+  return newStr;
+}
+
+console.log(decode('a2b6')); // should log 'aabbbbbb'
+console.log(decode('a10b10')); // should log 'abbbbbbbbbb'
+// loop 1: newStr = a
+// loop 2: newStr = a, freStr="1"
+// loop 3: newStr = a, freStr="10"
+// loop 4: freStr="10", fre=10, 
+console.log(decode('a1b10c6')); // should log 'abbbbbbbbbbcccccc'
