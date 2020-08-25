@@ -1,72 +1,59 @@
-//8/12/20
+//8/24/2020
 /**
- * param {String} str
- * return {String} with the original "compressed"
- * if the "compressed" version IS NOT shorter,
- * return the original
+ * @param {number[]} intArr an array of integers
+ * @param {number} i index, which defaults to 0
+ * @return {number} the sum of all the elements
  */
 
-function encode(str) {
-  // your code here
-  var output = '';
-  var count = 0;
-  for (var i = 0; i < str.length; i++){
-    count++;
-    if (str[i] != str[i+1]) {
-      output += str[i] + count;
-      count = 0;
-    }
+function iterArr(arr) {
+  //your code here 
+  var sum = 0;
+  for(var i=0; i < arr.length; i++){
+      sum = sum + arr[i];
   }
-  if (output.length < str.length){
-    return output;
-  }
-  return str;
+  return sum; 
 }
 
-//   str = 'abbbaa'
-//   myStr = 'a1b3a2'
-//   compare str.length vs myStr.length
-//   myObj ={
-//     'a': 0,
-//     'b': 0
-//   }
-console.log(encode('aabbbbbb')); // should log 'a2b6'
-console.log(encode('abbbbbbbbbb')); // should log 'a1b10'
-console.log(encode('abbbaa')); // should log 'abbbaa' rather 
 
+function rSumArray(arr, i = 0) {
+  if (i == arr.length) {
+      return 0;
+  }
+  return arr[i] + rSumArray(arr, i + 1);
+}
+
+console.log(rSumArray([1, 4, 6])); // should log 11
+console.log(rSumArray([2, -4, 6])); // should log 4
+console.log(rSumArray([2, -4, 6], 1)); // should log 2
 
 /**
- * param {String} str
- * return {String} with the original "expanded"
- * 
- * parseInt('a') returns NaN
- * parseInt('5') returns 5
- * isNaN('c') returns true
- * isNaN(5) returns false
+ * @param {number} num
+ * @return {number} the sum from one up to and including the number
  */
 
-function decode(str) {
-  var newStr="", freStr="", fre=0, prevChar = str[0];
-  for (var i = 1; i<=str.length; i++){
-    if (isNaN(str[i])){
-      for(var j = 0; j < parseInt(freStr); j++){
-          newStr +=  prevChar;
-      }
-      prevChar = str[i];
-      freStr="";
-    }
-    else {
-      freStr += str[i];
-    }
+function rSigma(num) {
+
+  /* base case */
+  
+  if (num == 0) {
+    return num;
   }
+  
+  return num + rSigma(num - 1);
+  }
+  
+console.log(rSigma(4)); // should log 10 (1 + 2 + 3 + 4)
+console.log(rSigma(5)); // should log 15 (1 + 2 + 3 + 4 + 5)
 
-  return newStr;
+
+//Morley's lecture code
+function rLoopThroughAndLog (arr, i=0){
+  //base case
+  // this is where we will stop the recursion
+  if (i == arr.length) return;
+  console.log(arr[i]);
+  //this is the recursive call
+  // the function calls itself
+  rLoopThroughAndLog(arr, i+1);
+  // the i + 1 is what we call "forward movement"
 }
-
-console.log(decode('a2b6')); // should log 'aabbbbbb'
-console.log(decode('a10b10')); // should log 'abbbbbbbbbb'
-// loop 1: newStr = a
-// loop 2: newStr = a, freStr="1"
-// loop 3: newStr = a, freStr="10"
-// loop 4: freStr="10", fre=10, 
-console.log(decode('a1b10c6')); // should log 'abbbbbbbbbbcccccc'

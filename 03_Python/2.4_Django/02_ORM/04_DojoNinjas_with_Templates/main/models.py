@@ -16,3 +16,4 @@ class Ninja(models.Model):
         on_delete=models.CASCADE
     )
 
+    

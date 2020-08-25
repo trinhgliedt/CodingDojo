@@ -863,3 +863,651 @@ console.log(decode('a10b10')); // should log 'abbbbbbbbbb'
 // loop 3: newStr = a, freStr="10"
 // loop 4: freStr="10", fre=10, 
 console.log(decode('a1b10c6')); // should log 'abbbbbbbbbbcccccc'
+
+//8/13/20
+/**
+ * param {String} str
+ * param {Number} num
+ * return {String} a new string with the characters
+ * rotated to the left by the given number
+ * Note: the number can be greater than the string length
+ */
+
+function rotateString(str, num) {
+  var newStr="", newNum=0;
+  newNum = Math.floor(num%str.length);
+  console.log("newNum: ",newNum);
+
+  for (var i=str.length-newNum; i<str.length; i++){
+    newStr += str[i];
+  }
+  for (var i=0; i<str.length-newNum; i++){
+    newStr += str[i];
+  } 
+  return newStr;
+}
+
+console.log(rotateString('this', 1));
+console.log(rotateString('this', 5));
+console.log(rotateString('this', 9));
+
+console.log(rotateString('Boris Godunov', 5));
+
+
+/**
+ * param {String} str1
+ * param {String} str2
+ * return {Boolean} Is the second string a rotation of the first?
+ * See if you can optimize once you get it working.
+ */
+
+function isRotation(str1, str2) {
+  var firstChar = str1[0], firstPos=0, newStr="";
+  for (var i=0; i<str2.length; i++ ){
+    if (str2[i]==firstChar){
+      if (str2[i] !=str2[i-1]){
+        firstPos =i;
+      }
+    }
+    console.log("firstPos:",firstPos);
+  }
+  for (var i=firstPos; i<str2.length; i++ ){
+    newStr += str2[i];
+  } //Boris Go
+  for (var i=0; i<firstPos; i++ ){
+    newStr += str2[i];
+  } //Boris Godunov
+  console.log("newStr: ",newStr);
+  return newStr == str1;
+}
+
+console.log(isRotation('Boris Godunov', 'dunovBoris Go')); 
+console.log(isRotation('BBBBoris Godunov', 'dunovBBBBoris Go'));
+console.log(isRotation('Boris Godunov', 'vBoris Goduno'));
+console.log(isRotation('Boris Godunov', 'oris GodunovB'));
+// should log true
+
+console.log(isRotation('hello world', 'llo worldHe'));
+// should log false
+
+function isRotation(str1, str2) {
+  // string lengths do not match
+  if (str1.length != str2.length){
+      return false;
+  }
+
+  for(var i = 0; i < str1.length; i++){
+      // Rotate str1 by i and compare with str2 each time
+      if (rotateString(str1, i) == str2){
+          // If the if-statement ever passes, we can exit the function with a true.
+          return true;
+      }
+  }
+  // If the if-statement never passed, we exit the function with a false.
+  return false;
+}
+
+console.log(isRotation('Boris Godunov', 'dunovBoris Go'));
+// should log true
+
+console.log(isRotation('hello world', 'llo worldHe'));
+// should log false
+
+
+//8/14/20
+/**
+ * @param {Array<Object>} newInv new inventory
+ * @param {Array<Object>} currentInv current inventory
+ * @return {Array<Object>} the current inventory after
+ * updating it with the new inventory
+ * new items get added; existing items have quantities changed
+ */
+
+//Howard's group: 
+function updateInventory(newInv, currentInv) {
+  for (var new_item of newInv){
+      var found_item = false;
+      for (var curr_item of currentInv){
+          if (new_item['name'] === curr_item['name']){
+              curr_item['quantity'] += new_item['quantity'];
+              found_item = true;
+              break;
+          }
+      }
+      if (!found_item){
+          currentInv.push(new_item);
+      }
+  }
+  return currentInv;
+} 
+
+console.log(updateInventory([{name: 'item',quantity: 2},{name: 'item2',quantity: 3}], [{name: 'item',quantity: 2}]));
+
+
+function trim(str) {
+  // console.log("str length:",str.length);
+  var startPos = 0, endPos=0, newStr="";
+  if ((str[0] != " " && str[0] != "\t" && str[0] != "\n")){
+    startPos = 0;
+  }
+  else{
+    for (var i=1; i<str.length-1; i++){
+    // console.log("----------IN LOOP:",i)
+      if ((str[i-1] == " " || str[i-1] == "\t" || str[i-1] == "\n") && (str[i] != " " && str[i] != "\t" && str[i] != "\n")){
+        // console.log("is prev blank?", (str[i-1] == " " || str[i-1] == "\t" || str[i-1] == "\n"))
+        // console.log("is current not blank?", (str[i] != " " || str[i] != "\t" || str[i] != "\n"))
+        startPos = i;
+        // console.log("startPos: ",startPos)
+      }
+    }
+  }
+  if ((str[str.length-1] != " " && str[str.length-1] != "\t" && str[str.length-1] != "\n")){
+  endPos = str.length-1;
+  }
+  else{
+    for (var i=str.length-1; i>=0; i--){
+      if ((str[i+1] == " " || str[i+1] == "\t" || str[i+1] == "\n") && (str[i] != " " && str[i] != "\t" && str[i] != "\n")){
+        endPos = i;
+        // console.log("endPos: ",endPos)
+      }
+    }
+  }
+  for (var j = startPos; j<=endPos; j++){
+    newStr += str[j];
+  }
+  return newStr;
+}
+
+console.log(trim('  this   ')); // should log 'this'
+console.log(trim('        multiline')); // should log 'multiline'
+console.log(trim('this that')); // should log 'this that'
+
+//short version, without console.log
+function trim(str) {
+  var startPos = 0, endPos=0, newStr="";
+  if ((str[0] != " " && str[0] != "\t" && str[0] != "\n")){
+    startPos = 0;
+  }
+  else{
+    for (var i=1; i<str.length-1; i++){
+      if ((str[i-1] == " " || str[i-1] == "\t" || str[i-1] == "\n") && (str[i] != " " && str[i] != "\t" && str[i] != "\n")){
+        startPos = i;
+      }
+    }
+  }
+  if ((str[str.length-1] != " " && str[str.length-1] != "\t" && str[str.length-1] != "\n")){
+  endPos = str.length-1;
+  }
+  else{
+    for (var i=str.length-1; i>=0; i--){
+      if ((str[i+1] == " " || str[i+1] == "\t" || str[i+1] == "\n") && (str[i] != " " && str[i] != "\t" && str[i] != "\n")){
+        endPos = i;
+      }
+    }
+  }
+  for (var j = startPos; j<=endPos; j++){
+    newStr += str[j];
+  }
+  return newStr;
+}
+
+console.log(trim('  this   ')); // should log 'this'
+console.log(trim('        multiline')); // should log 'multiline'
+console.log(trim('this that')); // should log 'this that'
+
+
+// ----------------------------- Shorter version
+function trim(str) {
+  var blank = {" ": 1, "\t": 1, "\n": 1 };
+  var startPos = 0, endPos=0, newStr="";
+  if (blank.hasOwnProperty(str[0]) == false){
+    startPos = 0;
+  }
+  else{
+    for (var i=1; i<str.length-1; i++){
+      if ((blank.hasOwnProperty(str[i-1])) && (blank.hasOwnProperty(str[i]) == false)){
+        startPos = i;
+      }
+    }
+  }
+  if (blank.hasOwnProperty(str[str.length-1]) == false){
+    endPos = str.length-1;
+  }
+  else{
+    for (var i=str.length-1; i>=0; i--){
+      if ((blank.hasOwnProperty(str[i+1])) && (blank.hasOwnProperty(str[i]) == false)){
+        endPos = i;
+      }
+    }
+  }
+  for (var j = startPos; j<=endPos; j++){
+    newStr += str[j];
+  }
+  return newStr;
+}
+
+console.log(trim('  this   ')); // should log 'this'
+console.log(trim('        multiline')); // should log 'multiline'
+console.log(trim('this that')); // should log 'this that'
+
+
+
+/**
+ * param {String} str1
+ * param {String} str2
+ * return {Boolean} Is the second string an anagram of the first?
+ * Anagram: characters can be rearranged to make the same string
+ */
+
+// long version
+function freqTable(str) {
+  var obj = {};
+  for (var i in str) {
+    var character = str[i];
+    if (obj.hasOwnProperty(character)) {
+      obj[character]++;
+    }
+    else {
+      obj[character] = 1;
+    }
+  }
+  return obj;
+}
+// console.log(freqTable('Yes'));
+// console.log(freqTable('seY')); 
+// console.log(freqTable('eYs')); 
+
+function isAnagram(str1, str2) {
+  var obj1 = freqTable(str1), obj2 = freqTable(str2);
+  // console.log("obj1: ",freqTable(str1));
+  // console.log("obj2: ",freqTable(str2));
+  // console.log("obj1 length: ",Object.keys(obj1).length);
+  // console.log("obj2 length: ",Object.keys(obj2).length);
+  var check = false;
+  if (Object.keys(obj1).length == Object.keys(obj2).length){
+    // console.log("in if");
+    for (var key in obj1){
+      if (obj2.hasOwnProperty(key) && obj1[key] == obj2[key]){
+        check = true;
+      }
+    }
+  }
+   return check;
+}
+console.log(isAnagram('Yes', 'eYs')); // should log true
+console.log(isAnagram('silent', 'listen')); // should log true
+console.log(isAnagram('ono', 'noa'));
+
+// ------------------------------short version
+function freqTable(str) {
+  var obj = {};
+  for (var i in str) {
+    var character = str[i];
+    if (obj.hasOwnProperty(character)) {
+      obj[character]++;
+    }
+    else {
+      obj[character] = 1;
+    }
+  }
+  return obj;
+}
+
+function isAnagram(str1, str2) {
+  var obj1 = freqTable(str1), obj2 = freqTable(str2);
+  var check = false;
+  if (Object.keys(obj1).length == Object.keys(obj2).length){
+    for (var key in obj1){
+      if (obj2.hasOwnProperty(key) && obj1[key] == obj2[key]){
+        check = true;
+      }
+    }
+  }
+   return check;
+}
+console.log(isAnagram('Yes', 'eYs')); // should log true
+console.log(isAnagram('silent', 'listen')); // should log true
+console.log(isAnagram('ono', 'noa'));
+
+
+//8/17/2020
+/**
+ * param {number[]} arr
+ * return {boolean}
+ * Is there a point between indices
+ * where the summed values on each side are equal?
+ */
+
+function balancePoint(arr) {
+  var sumForward = 0, sumBackward = 0, sumAll = 0;
+  var check = false;
+  for (var i =0; i<arr.length; i++){
+    sumAll += arr[i];
+  }
+  for (var j =0; j<arr.length; j++){
+    // console.log("-------Beg of loop: ", j)
+    sumForward += arr[j];
+    sumBackward = sumAll - sumForward;
+    // console.log("sumForward: ", sumForward);
+    // console.log("sumBackward: ", sumBackward);
+    if (sumForward == sumBackward){
+      // console.log("------inside if")
+      check = true;
+      // console.log("result: ", result);
+    }
+  }
+  return check;
+}
+
+console.log(balancePoint([1, 2, 3, 4])); // should log false
+// i = 0            sumF = 1, sumR = arr[4-1-0]    sumR = arr[3]=4
+console.log(balancePoint([3, 4, 2, 5]));
+// should log true (between indices 1 and 2)
+
+
+/**
+ * param {number[]} arr
+ * return {number}
+ * if there is an index in which the summed values
+ * on each side are equal, return it
+ * otherwise, return -1
+ */
+
+function balanceIndex(arr) {
+  var sumForward = 0, sumBackward = 0, sumAll = 0;
+  var result = -1;
+  for (var i =0; i<arr.length; i++){
+    sumAll += arr[i];
+  }
+  for (var j =1; j<arr.length; j++){
+    // console.log("-------Beg of loop: ", j)
+    sumForward += arr[j-1];
+    sumBackward = sumAll - sumForward - arr[j];
+    // console.log("sumForward: ", sumForward);
+    // console.log("sumBackward: ", sumBackward);
+    if (sumForward == sumBackward){
+      // console.log("------inside if")
+      result = j;
+      // console.log("result: ", result);
+    }
+  }
+  return result;
+}
+
+console.log(balanceIndex([-2, 5, 7, 0, 3])); // should log 2
+console.log(balanceIndex([9, 9])); // should log -1
+
+//8/18/2020
+/**
+ * param {number[]} sortedArr array of SORTED integers
+ * param {number} searchVal
+ * return {boolean}
+ * 
+ * Is the given value in the array?
+ * DON'T ITERATE THROUGH THE ENTIRE ARRAY
+ */
+
+function binarySearch(sortedArr, searchVal) {
+  var check = false;
+  var startIndex = 0, endIndex = sortedArr.length-1;
+  var midPoint = Math.floor([sortedArr.length/2])
+  if (sortedArr[midPoint] == searchVal){
+    return true;
+  }
+  else if (sortedArr[midPoint] > searchVal){
+    if (sortedArr[midPoint-1] == searchVal){check = true;}
+    else if (sortedArr[midPoint-1] < searchVal){check = false;}
+    else if (sortedArr[midPoint-1] > searchVal){
+      endIndex = midPoint-1;
+      midPoint = Math.floor((endIndex-startIndex)/2);
+      if (sortedArr[midPoint] == searchVal){check = true;}
+      else if (sortedArr[midPoint] < searchVal){check = false;}
+      else if (sortedArr[midPoint] > searchVal){
+        for (var i=midPoint-1; i>=0; i--){
+          if (sortedArr[i] == searchVal){check = true;}
+        }
+      }
+    }
+  }
+  else if (sortedArr[midPoint] < searchVal){
+    if (sortedArr[midPoint+1] == searchVal){check = true;}
+    else if (sortedArr[midPoint+1] > searchVal){check = false;}
+    else if (sortedArr[midPoint+1] < searchVal){
+      startIndex = midPoint+1;
+      midPoint = Math.floor((endIndex-startIndex)/2);
+      if (sortedArr[midPoint] == searchVal){check = true;}
+      else if (sortedArr[midPoint] > searchVal){check = false;}
+      else if (sortedArr[midPoint] < searchVal){
+      for (var i =midPoint+1; i<sortedArr.length; i++){
+        if (sortedArr[i] == searchVal){check = true;}
+      }
+    }
+  }
+  }
+  return check;
+}
+
+console.log(binarySearch([1, 2, 3, 4, 5], 3));
+console.log(binarySearch([1, 2, 4, 5], 3));
+console.log(binarySearch([1, 2, 4, 5, 6, 7, 9], 3))
+//Howard's group:
+function binarySearch(sortedArr, searchVal) {
+  // your code here
+  var lowInd = 0;
+  var highInd = sortedArr.length - 1;
+
+  while(lowInd <= highInd){
+    var midInd = Math.floor((lowInd + highInd) / 2);
+    if(searchVal == sortedArr[midInd]){
+      return true;
+    }
+
+    if(sortedArr[midInd] > searchVal){
+      highInd = midInd - 1;
+    }
+    else if(sortedArr[midInd] < searchVal){
+      lowInd = midInd + 1;
+    }
+  }
+
+  return false;
+}
+
+
+/**
+ * BONUS: Once done, create this version
+ * returns the number of occurrences of the value
+ * 
+ * @param {number[]} sortedArr array of SORTED integers
+ * @param {number} searchVal
+ * @return {number} the number of occurrences of the searched for value
+ */
+//Ranil's group
+function binarySearchBonus(sortedArr, searchVal) {
+  // your code here
+  /*
+        st
+    st  en  
+     0       2    3       5     mid= ( (0 + 5) / 2)= 2.5    Math.floor(2.5) = 2
+    [1   2   3    3  55  76]   3    mid= (0 + 1 / 2) = .5 Math.floor(.5) = 0
+
+
+*/    
+    var count = 0;
+    var start = 0;
+    var end = sortedArr.length - 1;
+    var mid = Math.floor( (start + end ) /2);
+
+    var found = false;
+    while  ( !found ) {
+
+        // found it
+        if (sortedArr[mid] == searchVal)  {
+          count = 1;  
+          // right  
+          for (var i=mid + 1; i < sortedArr.length; i++ )
+              if (sortedArr[i] == searchVal) 
+                  count += 1;
+              else break;
+          // left
+          for (var i=mid - 1; i >= 0; i-- )
+              if (sortedArr[i] == searchVal) 
+                  count += 1;
+              else break;  
+
+          console.log ('found it 1');
+          return count;
+        }
+
+        // array element in midpoint is greater
+        else if (sortedArr[mid] > searchVal) {
+            // start will be same
+            end = mid - 1;
+            mid = Math.floor( (start + end ) /2);
+        }
+        // array element in midpoint is less
+        else {
+            // end will be same
+            start = mid + 1;
+            mid = Math.floor( (start + end ) /2);
+        }
+
+        // exit when both markers are on same index
+        if (start >= end) break;
+    }
+
+
+    // still check if we found it
+    if (sortedArr[start] == searchVal) {
+        console.log ('found it 2');
+        count = 1;
+        for (var i=start + 1; i < sortedArr.length; i++ )  {
+          if (sortedArr[i] == searchVal) 
+              count += 1;
+          else break;
+          for (var i=start - 1; i >= 0; i-- )
+                if (sortedArr[i] == searchVal) 
+                    count += 1;
+                else break;  
+
+        }
+
+      return count; 
+    } 
+
+  return 0;  
+}
+
+
+
+
+console.log(binarySearchBonus([1, 2, 3, 4, 5], 3));
+// should log 1
+
+console.log(binarySearchBonus([1, 2, 4, 4, 4, 5], 4));
+// should log 3
+
+console.log(binarySearchBonus([1, 2, 4, 4, 5], 6));
+// should log 3
+
+//8/19/2020
+/**
+ * @param {number[]} sortedArr a SORTED array of numbers
+ * @return {number[]} the same OR a new array "deduped"
+ * 
+ * BONUSES:
+ * O(n): no nested loops, new array okay X
+ * In place (`no` new array)
+ * In place and O(n): no nested loops
+ * Keep it O(n) even if unsorted
+ */
+
+function removeDuplicates(sortedArr) {
+  var newArr=[];
+  for (var i=0; i<sortedArr.length; i++){
+    if (sortedArr[i] != sortedArr[i+1] ){
+      newArr.push(sortedArr[i]);
+    }
+  }
+  return newArr;
+}
+
+console.log(removeDuplicates([1, 2, 3, 4, 4, 4, 5]));
+// should log [1, 2, 3, 4, 5]
+console.log(removeDuplicates([5, 6, 5, 7, 8, 6, 4, 2, 10]));
+
+function removeDuplicates(sortedArr) {
+  for (var i=1; i<sortedArr.length; i++){
+    if (sortedArr[i-1] == sortedArr[i] ){
+      
+    }
+  }
+  return sortedArr;
+}
+
+/**
+ * @param {number[]} intArr array of integers
+ * @return {number|number[]}
+ * 
+ * if one number shows up with the highest frequency, return it
+ * if all numbers show up the same number of times, return []
+ * if multiple numbers have the same frequency, return them in an array
+ */
+
+function findAllModes(intArr) {
+  // your code here
+  // To get a frequency table for the array
+  var freqTable = {}, newArr=[];
+  for(var i = 0; i < intArr.length; i++){
+    if(freqTable.hasOwnProperty(intArr[i])){
+      freqTable[intArr[i]]++;
+    }
+    else{
+      freqTable[intArr[i]] = 1;
+    }
+  }
+  // To find the highest frequency
+  var maxFreq = 0;
+  for (var key in freqTable){
+    if (maxFreq < freqTable[key]){
+      maxFreq = freqTable[key]; // maxFreq=2
+    }
+  }
+  
+  // Set a flag for when we find an element that doesn't get appended to the newArr
+  var found = false;
+  // Loop through the freqTable and compare with maximum frequency we found from previous loop
+  for (var key in freqTable){
+    if (maxFreq == freqTable[key]){
+      newArr.push(parseInt(key));
+    }
+    else {
+      found = true;
+    }
+  }
+  // if newArr only has one value that means there's only one highest frequency: --> return this newArr
+  if (newArr.length == 1){
+    return newArr[0];
+  }
+ 
+
+  // if flag is true, that means at least one value in the given array has lower frequency than other values. Also means that this newArr contains values with the same frequency: --> return this newArr
+  // if flag is false, that means all values in the given array have the same frequency: --> return an empty array
+  return found ? newArr: [];
+
+  // if(found){
+  //   return newArr
+  // }
+  // else{
+  //   return [];
+  // }
+
+}
+
+console.log(findAllModes([1, 2, 3, 4])); // should log []
+console.log(findAllModes([1, 1, 2, 2, 3, 3])); // should log []
+console.log(findAllModes([1, 1, 3, 4])); // should log 1
+console.log(findAllModes([1, 1, 3, 4, 4])); // should log [1, 4]
+//freqTable ={"1": 2, "3":1, "4":2}
+//                   maxFreq=2
+//                  newArr = ["1", "4"]
