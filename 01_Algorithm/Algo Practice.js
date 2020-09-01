@@ -1511,3 +1511,315 @@ console.log(findAllModes([1, 1, 3, 4, 4])); // should log [1, 4]
 //freqTable ={"1": 2, "3":1, "4":2}
 //                   maxFreq=2
 //                  newArr = ["1", "4"]
+
+//8/24/2020
+/**
+ * @param {number[]} intArr an array of integers
+ * @param {number} i index, which defaults to 0
+ * @return {number} the sum of all the elements
+ */
+
+
+function rSumArray(arr, i = 0) {
+  if (i == arr.length) {
+      return 0;
+  }
+  return arr[i] + rSumArray(arr, i + 1);
+}
+
+console.log(rSumArray([1, 4, 6])); // should log 11
+console.log(rSumArray([2, -4, 6])); // should log 4
+console.log(rSumArray([2, -4, 6], 1)); // should log 2
+
+/**
+ * @param {number} num
+ * @return {number} the sum from one up to and including the number
+ */
+
+function rSigma(num) {
+
+  /* base case */
+  
+  if (num == 0) {
+    return num;
+  }
+  
+  return num + rSigma(num - 1);
+  }
+  
+console.log(rSigma(4)); // should log 10 (1 + 2 + 3 + 4)
+console.log(rSigma(5)); // should log 15 (1 + 2 + 3 + 4 + 5)
+
+
+//Morley's lecture code
+function rLoopThroughAndLog (arr, i=0){
+  //base case
+  // this is where we will stop the recursion
+  if (i == arr.length) return;
+  console.log(arr[i]);
+  //this is the recursive call
+  // the function calls itself
+  rLoopThroughAndLog(arr, i+1);
+  // the i + 1 is what we call "forward movement"
+}
+//8/25/20
+/**
+ * @param {number[]} intArr an array of integers
+ * @param {number} i index, which defaults to 0
+ * @return {number} the sum of all the elements
+ */
+
+function rSumArray(arr, i = 0) {
+  if (i == arr.length) {
+      return 0;
+  }
+  return arr[i] + rSumArray(arr, i + 1);
+}
+
+console.log(rSumArray([1, 4, 6])); // should log 11
+console.log(rSumArray([2, -4, 6])); // should log 4
+console.log(rSumArray([2, -4, 6], 1)); // should log 2
+
+
+/**
+ * @param {number} num
+ * @return {number} the sum from one up to and including the number
+ */
+
+function rSigma(num) {
+
+  /*  base case */
+  
+    if  (num == 0)  { 
+      return num; 
+    }
+  
+    return num + rSigma(num - 1);
+  
+  }
+  
+  console.log(rSigma(4)); // should log 10 (1 + 2 + 3 + 4)
+  console.log(rSigma(5)); // should log 15 (1 + 2 + 3 + 4 + 5)
+
+  //8/26/2020
+/**
+ * @param {number[]} sortedArr a SORTED array of numbers
+ * @param {number} searchVal a value to search for
+ * @return {boolean} Is the value in the array?
+ * BONUS: Do it without slice
+ */
+
+function rBinarySearch(sortedArr, searchVal) {
+  // base case
+  if(sortedArr.length == 0){
+      return false;
+  }
+
+  var lowInd = 0;
+  var highInd = sortedArr.length - 1;
+  var midInd = Math.floor((lowInd + highInd) / 2);
+
+  // base case
+  if (searchVal == sortedArr[midInd]) return true;
+
+  if(searchVal > sortedArr[midInd]){
+      lowInd = midInd + 1;
+  }
+  else{
+      highInd = midInd - 1;
+  }
+
+  return rBinarySearch(sortedArr.slice(lowInd, highInd + 1), searchVal)
+}
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+// [1, 2, 3, 4, 5].slice(1, 4) returns [2, 3, 4], which is a NEW ARRAY
+// [1, 2, 3, 4, 5].slice(2) returns [3, 4, 5], which is a NEW ARRAY
+
+console.log(rBinarySearch([1, 2, 3, 4, 5], 3)); // should log true
+//                               2
+console.log(rBinarySearch([1, 2, 4, 5], 3)); // should log false
+
+
+
+
+
+/**
+ * @param {string} str a string to reverse
+ * @return {string} a new string with the characters reversed
+ */
+
+/**
+ * @param {string} str a string to reverse
+ * @return {string} a new string with the characters reversed
+ */
+
+function rStringReverse(str) {
+
+
+  // base case, exit situation
+  if  (str.length <= 1)
+      return str;
+
+  //                hello          ello                 h
+  //                                llo                eh
+  //                                 lo               leh
+  //                                  o              lleh
+  //                                                olleh       
+
+  return  rStringReverse(str.slice(1) ) + str[0]; 
+
+}
+
+console.log(rStringReverse('hello')); // should log 'olleh'
+console.log(rStringReverse('world')); // should log 'dlrow'
+
+
+//8/27/20
+/**
+ * @param {number} num an integer
+ * @return {number} a ONE-DIGIT integer
+ * sum all the digits until the answer has only ONE DIGIT
+ */
+
+function rSumToOneDigit(num) {
+  // base case
+  if (num.toString().length == 1){
+      return num;
+  }
+  var sum = 0;
+  for (var i = 0; i < num.toString().length; i++){
+      sum += parseInt(num.toString()[i]);
+  }
+  return rSumToOneDigit(sum);
+}
+
+console.log(rSumToOneDigit(19));
+// should log 1: 1 + 9 = 10 -> 1 + 0 = 1
+
+console.log(rSumToOneDigit(999));
+// should log 9: 9 + 9 + 9 = 27 -> 2 + 7 = 9
+
+//Nick's group: 
+function rSumToOneDigit(num) {
+
+  return (num - 1) % 9 + 1;
+  
+  }
+  
+  console.log(rSumToOneDigit(999));
+
+
+/**
+ * @param {string} str the starting string
+ * @param {string[]} anagrams an array of anagrams (default value is empty)
+ * @param {string} partial a partial solution (default value is empty)
+ * @return {string[]} an array of anagrams made from the original string
+ * NOTE: the order of the individual strings inside the
+ * returned array is unimportant; just make sure you get them all
+ */
+
+function stringAnagrams(str, anagrams = [], partial = '') {
+  // your code here
+  if(str.length === 0) {
+    // do something, base case
+    if(partial.length !== 0) {
+      anagrams.push(partial);
+    }
+
+  } else {
+    // forward movement and recursion
+    for(var i = 0; i < str.length; i++) {
+      var char = str[i];
+
+      // creates a new string including everything but the character
+      var newStr = str.slice(0, i) + str.slice(i + 1);
+      var newPartial = partial + char;
+
+      stringAnagrams(newStr, anagrams, newPartial);
+    }
+
+  }
+
+  return anagrams;
+}
+
+// 'something'.slice(2, 4) returns a new string 'me'
+// 'something' + 'else' returns a new string 'somethingelse'
+
+console.log(stringAnagrams('mi'));
+// should log ['mi', 'im'] or ['im', 'mi']
+
+console.log(stringAnagrams('mil'));
+// should log ['mil', 'mli', 'iml', 'ilm', 'lim', 'lmi']
+
+//8/28/20
+/**
+ * @param {number} num1 an integer
+ * @param {number} num2 an integer
+ * @return {number} an integer
+ * remember finding a common denominator for fraction addition/subtraction?
+ */
+
+function lowestCommonMultiple(num1, num2, base1 = num1, base2 = num2) {
+  // your code here
+  if (num1 == num2) return num1;
+
+  if (num1 > num2) {
+      return lowestCommonMultiple(num1, num2 + base2, base1, base2);
+  }
+  return lowestCommonMultiple(num1 + base1, num2, base1, base2);
+}
+
+
+console.log(lowestCommonMultiple(3, 4)); // should log 12
+console.log(lowestCommonMultiple(4, 6)); // should log 12
+
+
+
+/**
+ * @param {string} str a string consisting of any number of these characters: 0, 1, ?
+ * @param {string[]} solutions an array of "expanded" strings (default value is empty)
+ * @param {string} partial a "partial" solution string
+ * @return {string[]} the array of solutions
+ * with every `?` replaced by both a 0 and a 1
+ * NOTE: the order of the solutions in the output array DOES NOT MATTER
+ */
+
+function binaryStringExpansion(str, solutions = [], partial = '') {
+  // your code here
+}
+
+// 'something'.indexOf('m') returns 2
+// 'something'.indexOf('b') returns -1 since it's not in the string
+// 'something'.slice(2) returns a new string: 'mething'
+// 'something'.slice(2, 5) returns a new string: 'met'
+
+console.log(binaryStringExpansion('001?0'));
+// should log ['00100', '00110']
+
+console.log(binaryStringExpansion('001?0?'));
+// should log ['001000', '001001', '001100', '001101']
+
+//8/31/20
+// Bubble Sort Array
+// For review, create a function that uses
+// BubbleSort to sort an unsorted array in-place.
+function bubbleSort(arr){
+  for (var j = 0; j<arr.length; j++){
+    var isSorted = true;
+    for (var i=0; i<arr.length-1; i++){
+      isSorted = false;
+      if (arr[i] > arr[i+1]){
+        var temp = arr[i];
+        arr[i] = arr[i+1];
+        arr[i+1] = temp;
+      }
+    }
+    if (isSorted){ return;}
+  }
+  return arr;
+}
+
+console.log(bubbleSort([5,9,3,1,2,4,3,7,1,0]));
+console.log(bubbleSort([4,7,8,3,4,1,8,6]));

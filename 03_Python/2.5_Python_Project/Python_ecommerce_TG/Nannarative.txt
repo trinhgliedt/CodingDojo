@@ -1,0 +1,14 @@
+Hi this is Trinh. Sorry I'm weird on project day. I just had a dental surgery today and my mouth is totally numb and I can't talk. 
+I'm using this text to speech app to talk for me.
+
+Let me share my screen for my project.
+
+So this is what I had on my project so far. I'm probaly only halfway done comparing to what I wanted to get done.. 
+
+So this is my clothes shop. Currently I've got 3 categories of clothing for men, women and kids.. My home page shows some picture of the categories. 
+When the user clicks into the name of the category it will display the items in each category.
+
+For the search box on the top left, I used fotn Awesome and the append/prepend method to get the magnifying class icon to appear inside the input box.
+I was trying to 
+
+
