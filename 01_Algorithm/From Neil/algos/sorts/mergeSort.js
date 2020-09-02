@@ -31,19 +31,44 @@ const expectedMerge = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  *          @left and @right are sorted
  * @return  {Array<number>}
  *          A new sorted array containing all the elements of @left and @right
- * Time:    O(...)
- * Space:   O(...)
+ *
+ * Time:    O(n + m) -> O(n) linear
+ *          n = left.length, m = right.length.
+ *          Every item from each array is visited once.
+ * Space:   O(n + m) => O(n) linear
  */
-//            i         j
- // [0, 1, 2]    [0, 1, 5]     [0, 0, 1, 1, 2, 5]
 function merge(left, right) {
-  for (let i = 0; i<arr.length; i++){
-    if (left[0] <= right[0]){
-      left.push(right[0]);
-    } else {right.push(left[0]);}
+  let result = [];
+  let indexLeft = 0;
+  let indexRight = 0;
+
+  while (indexLeft < left.length && indexRight < right.length) {
+    if (left[indexLeft] < right[indexRight]) {
+      result.push(left[indexLeft]);
+      indexLeft++;
+    } else {
+      result.push(right[indexRight]);
+      indexRight++;
+    }
   }
-  return left;
+
+  // in case one of the arrays has remaining items due to unequal lengths, all of those can be added
+  while (indexLeft < left.length) {
+    result.push(left[indexLeft]);
+    indexLeft++;
+  }
+
+  while (indexRight < right.length) {
+    result.push(right[indexRight]);
+    indexRight++;
+  }
+
+  return result;
+
+  // one liner version of adding in any left over items
+  // return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight));
 }
+
 // mergeSort
 const numsOrdered = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const numsRandomOrder = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
@@ -60,51 +85,17 @@ const expectedSort = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  * Avg:     O(n log(n)) linearithmic
  * Worst:   O(n log(n)) linearithmic
  */
-//  nums.length <= 1       nums
-//  nums.length > 1        [left] [right]
 function mergeSort(nums) {
-  for (let i = 0; i<arr.length; i++){
-    f
+  if (nums.length === 1) {
+    // return once we hit an array with a single item
+    return nums;
   }
 
+  const middle = Math.floor(nums.length / 2); // get the middle item of the array rounded down
+  const left = nums.slice(0, middle); // items on the left side
+  const right = nums.slice(middle); // items on the right side
 
-
+  return merge(mergeSort(left), mergeSort(right));
 }
 
 module.exports = { merge, mergeSort };
-
-
-function merge(left, right) {
-  let retr = [];
-  let i = 0, j = 0;
-
-  while (i < left.length && j < right.length) {
-    // ...
-    if (left[i] <= right[j]) {
-      retr[i + j] = ...//
-      i++;
-    } else {
-      retr[i + j] = ...//
-      j++;
-    }
-  }
-
-  // i === left.length || j === right.length
-  while (i < left.length) {
-    // j === right.length
-    // paste the rest of left
-  }
-  while (j < right.length) {
-    // i === left.length
-    // paste the rest of right
-  }
-
-  /*
-  for (let i = 0; i<right.length; i++){
-      left.push(right[i]);
-  }
-  */
-
-
-  return left;
-}

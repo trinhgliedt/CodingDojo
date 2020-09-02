@@ -1823,3 +1823,75 @@ function bubbleSort(arr){
 
 console.log(bubbleSort([5,9,3,1,2,4,3,7,1,0]));
 console.log(bubbleSort([4,7,8,3,4,1,8,6]));
+
+//9/1/20
+// Stable
+// It is stalbe if when there are duplicates, the duplicates are left in original order relative to one another
+// Making a sort stable incurs overhead (takes more time)
+// Click the above link for an example of when stability is needed
+function insertionSort(arr){
+  for (let j = 1; j<arr.length; j++){
+    for (let i = j; i>=0; i--){
+      if (arr[i] < arr[i-1]){
+        temp = arr[i-1];
+        arr[i-1] = arr[i];
+        arr[i] = temp;
+      }
+    }
+  }
+  return arr;
+}
+
+const numsOrdered = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const numsRandomOrder = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
+//                      [2, 9, 5, 6, 4, 3, 7, 10, 1, 8]
+//                      [2, 5, 9, 6, 4, 3, 7, 10, 1, 8]
+//                      [2, 5, 6, 9, 4, 3, 7, 10, 1, 8]
+//                      [2, 5, 6, 4, 9, 3, 7, 10, 1, 8]
+//                      [2, 5, 6, 4, 3, 9, 7, 10, 1, 8]
+//                      [2, 5, 6, 4, 3, 7, 9, 10, 1, 8]
+//                      [2, 5, 6, 4, 3, 7, 9, 10, 1, 8]
+//                      [2, 5, 6, 4, 3, 7, 9, 1, 10, 8]
+//                      [2, 5, 6, 4, 3, 7, 9, 1, 8, 10]
+const numsReversed = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+console.log("numsOrdered: ",insertionSort(numsOrdered));
+console.log("numsRandomOrder:", insertionSort(numsRandomOrder));
+console.log("numsReversed:", insertionSort(numsReversed));
+console.log("expected:", insertionSort(expected));
+
+//from Neil:
+function insertionSort(nums) {
+  for (let i = 1; i < nums.length; i++) {
+    // save the current 'target' so this space is available to use for shifting
+    let numToInsert = nums[i];
+    let leftIdx = i - 1;
+
+    while (leftIdx >= 0 && nums[leftIdx] > numToInsert) {
+      // shift to the right because it's greater than the item we are going to insert
+      nums[leftIdx + 1] = nums[leftIdx];
+      leftIdx--;
+    }
+    // shifting complete, insert position located
+    nums[leftIdx + 1] = numToInsert;
+  }
+  return nums;
+}
+
+function insertionSortSwap(nums) {
+  for (let i = 1; i < nums.length; i++) {
+    let currIdx = i; // to avoid altering i directly
+    let leftIdx = currIdx - 1; // compare to the left
+
+    while (leftIdx >= 0 && nums[leftIdx] > nums[currIdx]) {
+      // destructure swap notation
+      [nums[leftIdx], nums[currIdx]] = [nums[currIdx], nums[leftIdx]];
+
+      // curr got swapped to the left, so currIdx is now 1 to the left
+      currIdx--;
+      leftIdx = currIdx - 1;
+    }
+  }
+  return nums;
+}
