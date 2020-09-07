@@ -97,5 +97,8 @@ function mergeSort(nums) {
 
   return merge(mergeSort(left), mergeSort(right));
 }
-
+console.log(mergeSort(numsOrdered));
+console.log(mergeSort(numsRandomOrder));
+console.log(mergeSort(numsReversed));
+console.log(mergeSort(expectedSort));
 module.exports = { merge, mergeSort };

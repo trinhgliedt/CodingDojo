@@ -34,7 +34,7 @@ import React from "react";
 //functional component
 const PersonCard = props => {
     return (
-        <div class="text-left">
+        <div className="text-left">
             <h3>{ props.lastName }, { props.firstName }</h3>
             <p>Age: { props.age }</p>
             <p>Hair Color: { props.hairColor }</p>

@@ -84,6 +84,7 @@ const UserForm = (props) => {
         setConfirmPassword("");
         setHasBeenSubmitted(true);
         
+        
     };
 
     const formMessage = () => {
