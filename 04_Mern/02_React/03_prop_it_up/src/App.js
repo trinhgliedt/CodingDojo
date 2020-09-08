@@ -5,19 +5,20 @@ import './App.css';
 // import PersonCard from "./components/PersonCard";
 // import UserForm from "./components/HookForm";
 // import BoxList from "./components/BoxGenerator";
-import TabList from './components/Tabs';
+// import TabList from './components/Tabs';
+import ToDoList from './components/ToDoList';
 
 function App() {
   return (
     <div className="App">
-      <TabList/>
-      
+      <ToDoList></ToDoList>
     </div>
   );
 }
 
 export default App;
 
+{/* <TabList/> */}
 
 
 {/* <PersonCard firstName="Jane" lastName="Doe" age={45} hairColor="Black"/>
