@@ -1,6 +1,7 @@
 // import axios from 'axios';
 import React, { useState } from "react";
 
+
 const SearchBar = (props, {searchCategory="people", id=null}) => {
     if (props.content == null) {
         return ( 
@@ -23,6 +24,9 @@ const SearchBar = (props, {searchCategory="people", id=null}) => {
                 onChange = {(e) => {props.content.setId(e.target.value);}} 
                 style={{width: "50px", marginRight: "50px"}} type="number" min="1"
                 value = {props.id}/>
+                {/* <button 
+                onClick = { props.content.fetchAPI(props.content.searchCategory, props.content.id)}
+                >Search</button> */}
                 <button 
                 onClick = {(e) => props.content.fetchAPI(props.content.searchCategory, props.content.id)}
                 >Search</button>

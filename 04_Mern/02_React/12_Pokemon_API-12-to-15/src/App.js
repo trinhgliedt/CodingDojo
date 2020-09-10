@@ -10,7 +10,7 @@ import './App.css';
 // import BackgroundColor from './view/Routing_Practice/backgroundColor';
 
 import SearchBar from './components/LukeAPIWalker-search';
-import DisplayAPI from './components/LukeAPIWalker-display';
+// import DisplayAPI from './components/LukeAPIWalker-display';
 import DisplayCharacter from './components/Luke_character';
 import DisplayPlanet from './components/Luke_planet';
 import DisplayStarship from './components/Luke_starship';
@@ -26,31 +26,37 @@ function App() {
     
 
     function fetchAPI(searchCategory, id) {
-      // console.log("In fetch API");
-      // console.log("searchCategory:", searchCategory, ", id:", id);
+      console.log("In fetch API");
+      console.log("searchCategory:", searchCategory, ", id:", id);
       axios.get('https://swapi.dev/api/' + searchCategory + '/'+ id + '/')
           .then(response =>{
             setSearchResult(response.data);
             console.log("response.data:", response.data);
+            fetchHomeWorld(homeWorldUrl);
+            setHomeWorldUrl(null);
+            setHomeWorldUrl(searchResult.homeworld);
             navigate(`/${searchCategory}/${id}`);
           })
           .catch(response => {
             console.log("error response:", response);
             navigate(`/notfound`);
-
+            
           })
           ;
-    function fetchHomeWorld(homeWorldUrl){
-      axios.get(homeWorldUrl)
-      .then(response => {
+        }
         
-      })
+    function fetchHomeWorld(url){
+        setHomeWorld(null);
+        console.log("In fetchHomeWorld");
+        axios.get(url)
+        .then(response => {
+          setHomeWorld(response.data);
+        })
+        ;
     }
-         
-          
-          
-  }
-     const displayContent = {searchResult, searchCategory};
+        console.log("homeWorldUrl:", homeWorldUrl, ", homeWorld: ", homeWorld);
+
+    const displayContent = {searchResult, searchCategory, homeWorld };
     const content = {id, setId, searchCategory, setSearchCategory, fetchAPI};
 
   return (
