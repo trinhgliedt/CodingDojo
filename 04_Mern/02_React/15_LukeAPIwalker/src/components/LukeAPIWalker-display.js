@@ -46,6 +46,15 @@ const DisplayAPI = (props) => {
     //     );}
     //     )}
 
+    //      <div>
+    //         <h1>{id}: { name }</h1>
+    //         <div>
+    //             {Object.entries(display).slice(0,4).map(([key, val]) => {
+    //                 return(<p key={key}>{key}: {val}</p>);
+    //             })}
+    //         </div>
+    //         {(category==="people" && homeworld !=null) && <p>Homeworld: {homeworld.name}</p>}
+    //      </div>
 
 };
 export default DisplayAPI;

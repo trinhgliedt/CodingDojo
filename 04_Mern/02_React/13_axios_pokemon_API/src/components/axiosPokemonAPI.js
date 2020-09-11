@@ -7,7 +7,6 @@ const AxiosPokemon = (props) => {
     function fetchPokemon() {
         axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=807')
             .then(response => setPokemons(response.data.results))
-
     }
 
     return (

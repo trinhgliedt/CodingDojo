@@ -11,20 +11,6 @@ const squareMatrix = [
   [4, 5, 6],
   [9, 8, 9],
 ];
-
-const squareMatrix1 = [
-  [1,  2,  3,  4],
-  [4,  5,  6,  7],
-  [9,  8,  9,  10],
-  [11, 12, 13, 15],
-];
-//sum1=30
-//sum2=29
-//return 1
-//arr[0][0] + arr[1][1] + arr[2][2]
-// arr[0][2] + arr[2][1] + + arr[3][0]
-//arr[0][arr.length-1-0] + arr[1][arr.length-1-1] + arr[1][arr.length-1-2]
-//
 const expected = 2;
 /* 
   left to right diagonal: 1 + 5 + 9 = 15
@@ -39,18 +25,26 @@ const expected = 2;
  * @return  {number}
  *          Represents the absolute (Math.abs) difference between
  *          the top left to bottom right diagonal and the top right to bottom left diagonal
- * Time:    O(...)
- * Space:   O(...)
+ * Time:    O(n) linear
+ * Space:   O(1) constant
  */
 function diagonalDifference(sqrMatrix) {
-  let sum1 = 0, sum2=0;
-  for (let i = 0; i<sqrMatrix[0].length; i++){
-    sum1 += sqrMatrix[i][i];
-    sum2 += sqrMatrix[i][sqrMatrix.length-1-i];
+  let ltrSum = 0,
+    rtlSum = 0;
+
+  for (let i = 0; i < sqrMatrix.length; i++) {
+    const row = sqrMatrix[i];
+    ltrSum += row[i];
+    rtlSum += row[row.length - i - 1];
   }
-  return Math.abs(sum1-sum2);
-  
+  return Math.abs(ltrSum - rtlSum);
 }
-console.log(diagonalDifference(squareMatrix));
-console.log(diagonalDifference(squareMatrix1));
+
+function diagonalDifference2(sqrMatrix) {
+  let diff = 0;
+
+  sqrMatrix.forEach((row, i) => (diff += row[i] - row[row.length - i - 1]));
+  return Math.abs(diff);
+}
+
 module.exports = { diagonalDifference };

@@ -2120,3 +2120,145 @@ module.exports = { quickSort };
 console.log(quickSort(nums1));
 console.log(quickSort(expected1));
 console.log(quickSort(nums2));
+
+//9/10/20
+// Interview Algo given to alumni
+
+/* 
+  You are given a list of integers. Find all the consecutive sets of 
+  integers that adds up to the sum passed in as one of the inputs.
+*/
+
+const nums1 = [2, 5, 3, 6, 7, 23, 12];
+const sum1 = 16;
+const expected1 = [
+  [2, 5, 3, 6],
+  [3, 6, 7],
+];
+
+// Bonus:
+const nums2 = [2, 5, 3, 6, 7, 0, 0, 23, 12];
+const sum2 = 16;
+const expected2 = [
+  [2, 5, 3, 6],
+  [3, 6, 7],
+  [3, 6, 7, 0],
+  [3, 6, 7, 0, 0],
+];
+
+/**
+ * Finds all the sets of consecutive numbers that add up to the @targetSum
+ * @param {Array<number>} nums - Any order.
+ * @param {number} targetSum
+ * @return {Array<Array<number>>} - 2d array where each nested array
+ *         is a set of consecutive numbers that add up to the @targetSum
+ *         Consecutive in this context means the numbers whose indexes are one after the other only.
+ * Time:   O(...)
+ * Space:  O(...)
+ */
+
+ // my solution: not counting for bonus case yet. and result is duplicated
+function findConsqSums(nums, targetSum) {
+  let result = [];
+  for (let j=0; j<nums.length; j++){
+    // console.log("------------j:", j);
+
+    let sum = 0, i=j, tempArr = [];
+
+    while (i<nums.length && sum <= targetSum){
+      if ((sum + nums[i]) <= targetSum) {
+        sum += nums[i];
+        tempArr.push(nums[i]);
+      }
+      // console.log("i:", i, ", sum:", sum, ",tempArr:", tempArr);
+      i++;
+    }
+    if (sum == targetSum){
+      result.push(tempArr);
+    }
+  }
+  return result;
+  
+}
+console.log(findConsqSums(nums1, sum1));
+console.log(findConsqSums(nums2, sum2));
+
+module.exports = { findConsqSums };
+
+//9/11/20
+// Asked in "Python interview with a LinkedIn engineer: Matching pairs": https://youtu.be/wBXZD436JAg
+
+/*
+  Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+  You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+  Bonus: Make it O(n) time
+*/
+
+const nums1 = [2, 11, 7, 15];
+const targetSum1 = 9;
+
+// Order doesn't matter. Explanation: nums[0] + nums[2] = 2 + 7 = 9
+const expected1 = [0, 2];
+
+/**
+ * Finds the numbers that add up to @targetSum
+ * @param  {Array<number>} nums - Any order
+ * @param  {number} targetSum
+ * @return {Array<number>}
+ *         The two indexes of the numbers in @nums that add up to @targetSum
+ * Time:   O(...)
+ * Space:  O(...)
+ */
+function twoSum(nums, targetSum) {
+  let sum=0;
+  let i=0, result = []; 
+  while (sum <= targetSum && i < nums.length){
+      if (nums[i] < targetSum && (sum + nums[i]) <= targetSum) {
+          sum += nums[i];
+          result.push(i);
+        }
+      i++;
+  }
+  if (sum > targetSum){
+      result.pop();
+  }
+  if (sum == targetSum){
+      return result;
+    }
+  return result;
+
+}
+
+const nums1 = [2, 11, 7, 15];
+const targetSum1 = 9;
+console.log(twoSum(nums1, targetSum1));
+
+//the above doesn't work for this case: 
+//const nums1 = [2, 6, 11, 7, 15];
+//const targetSum1 = 9;
+
+
+module.exports = { twoSum };
+
+function twoSumV2(nums, targetSum) {
+  if (nums.length <= 1) {
+      return;
+  }
+  // Loop for first number
+
+  // k = 0, 1, 2
+  // k = 0, p = 1, 2, 3
+  // k = 1, p = 2, 3
+  // k = 2, p = 3
+  for (let k = 0; k < nums.length - 1; k++) {
+      // Loop for second number
+      for (let p = k+1; p < nums.length; p++) {
+          if (nums[k]+nums[p]==targetSum) { // Target sum met
+              return [k, p];
+          }
+      }
+  }
+  return false; // Not met
+}

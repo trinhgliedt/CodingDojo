@@ -21,7 +21,6 @@ function App() {
     const [searchCategory, setSearchCategory] = useState("people");
     const [id, setId] = useState(null);
     const [searchResult, setSearchResult] = useState(null);
-    const [homeWorldUrl, setHomeWorldUrl] = useState(null);
     const [homeWorld, setHomeWorld] = useState(null);
     
 
@@ -32,9 +31,9 @@ function App() {
           .then(response =>{
             setSearchResult(response.data);
             console.log("response.data:", response.data);
-            fetchHomeWorld(homeWorldUrl);
-            setHomeWorldUrl(null);
-            setHomeWorldUrl(searchResult.homeworld);
+            if (searchCategory == "people"){
+              fetchHomeWorld(response.data.homeworld);
+            }
             navigate(`/${searchCategory}/${id}`);
           })
           .catch(response => {
@@ -46,7 +45,6 @@ function App() {
         }
         
     function fetchHomeWorld(url){
-        setHomeWorld(null);
         console.log("In fetchHomeWorld");
         axios.get(url)
         .then(response => {
@@ -54,7 +52,6 @@ function App() {
         })
         ;
     }
-        console.log("homeWorldUrl:", homeWorldUrl, ", homeWorld: ", homeWorld);
 
     const displayContent = {searchResult, searchCategory, homeWorld };
     const content = {id, setId, searchCategory, setSearchCategory, fetchAPI};
