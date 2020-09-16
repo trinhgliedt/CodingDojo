@@ -2262,3 +2262,281 @@ function twoSumV2(nums, targetSum) {
   }
   return false; // Not met
 }
+//9/14/20
+/* 
+  Given a table name string and an object whose key value pairs represent column names and values for the columns
+  return a SQL insert statement string
+
+  Tip: string interpolation (using back ticks, the key to the left of num 1 key) make it easy to add variables into a string or to add quotations without needing to escape them.
+
+  Bonus: after solving it, write a 2nd solution focusing on functional programming using built in methods
+*/
+
+const table = "users";
+const insertData1 = { first_name: "John", last_name: "Doe" };
+const expected1 =
+  "INSERT INTO users (first_name, last_name) VALUES ('John', 'Doe');";
+
+// Bonus:
+const insertData2 = {
+  first_name: "John",
+  last_name: "Doe",
+  age: 30,
+  is_admin: false,
+};
+const expected2 =
+  "INSERT INTO users (first_name, last_name, age, is_admin) VALUES ('John', 'Doe', 30, false);";
+// Explanation: no quotes around the int or the bool, technically in SQL the bool would become a 0 or 1, but don't worry about that here.
+
+/**
+ * Generates a SQL insert statement from the inputs
+ * @param   {string} tableName
+ * @param   {Object} columnValuePairs
+ * @return  {string}
+ *          A string formatted as a SQL insert statement
+ *          where the columns and values are extracted
+ *          from @columnValuePairs
+ */
+function insert(tableName, columnValuePairs) {
+  let keyStr="( ", valStr="( ";
+  for (key of Object.keys(columnValuePairs)){
+    keyStr += key + ", ";
+  }
+  for (val of Object.values(columnValuePairs)){
+    if (typeof(val) == "string"){
+      valStr += '"' + val + '"' + ", ";
+    }
+    else {valStr += val + ", ";}
+  }
+  let newKeyStr = keyStr, newValStr =valStr;
+  if (keyStr.length > 3) {newKeyStr = keyStr.slice(0, (keyStr.length-2));}
+  if (newValStr.length > 3) {newValStr = valStr.slice(0, (valStr.length-2));}
+  newKeyStr += " )";
+  newValStr += " )";
+  return "INSERT INTO "+ tableName + newKeyStr +" VALUES "+ newValStr;
+}
+
+// console.log(insert(table, insertData1));
+console.log(insert(table, {}));
+// console.log(insert(table, insertData2));
+
+function insertFunctional(table, insertData) {
+  let keys = Object.keys(insertData);
+  return `INSERT INTO ${table} (${keys.join(", ")}) VALUES (${keys.map(x => typeof(insertData[x]) === "string" ? `'${insertData[x]}'` : insertData[x]).join(", ")})`;
+}
+// console.log(insertFunctional(table, insertData1));
+// console.log(insertFunctional(table, {}));
+// console.log(insertFunctional(table, insertData2));
+
+
+module.exports = {
+  insert,
+};/* 
+  Given a table name string and an object whose key value pairs represent column names and values for the columns
+  return a SQL insert statement string
+
+  Tip: string interpolation (using back ticks, the key to the left of num 1 key) make it easy to add variables into a string or to add quotations without needing to escape them.
+
+  Bonus: after solving it, write a 2nd solution focusing on functional programming using built in methods
+*/
+
+const table = "users";
+const insertData1 = { first_name: "John", last_name: "Doe" };
+const expected1 =
+  "INSERT INTO users (first_name, last_name) VALUES ('John', 'Doe');";
+
+// Bonus:
+const insertData2 = {
+  first_name: "John",
+  last_name: "Doe",
+  age: 30,
+  is_admin: false,
+};
+const expected2 =
+  "INSERT INTO users (first_name, last_name, age, is_admin) VALUES ('John', 'Doe', 30, false);";
+// Explanation: no quotes around the int or the bool, technically in SQL the bool would become a 0 or 1, but don't worry about that here.
+
+/**
+ * Generates a SQL insert statement from the inputs
+ * @param   {string} tableName
+ * @param   {Object} columnValuePairs
+ * @return  {string}
+ *          A string formatted as a SQL insert statement
+ *          where the columns and values are extracted
+ *          from @columnValuePairs
+ */
+function insert(tableName, columnValuePairs) {
+  let keyStr="( ", valStr="( ";
+  for (key of Object.keys(columnValuePairs)){
+    keyStr += key + ", ";
+  }
+  for (val of Object.values(columnValuePairs)){
+    if (typeof(val) == "string"){
+      valStr += '"' + val + '"' + ", ";
+    }
+    else {valStr += val + ", ";}
+  }
+  let newKeyStr = keyStr, newValStr =valStr;
+  if (keyStr.length > 3) {newKeyStr = keyStr.slice(0, (keyStr.length-2));}
+  if (newValStr.length > 3) {newValStr = valStr.slice(0, (valStr.length-2));}
+  newKeyStr += " )";
+  newValStr += " )";
+  return "INSERT INTO "+ tableName + newKeyStr +" VALUES "+ newValStr;
+}
+
+// console.log(insert(table, insertData1));
+console.log(insert(table, {}));
+// console.log(insert(table, insertData2));
+
+const table = "users";
+const insertData1 = { first_name: "John", last_name: "Doe" };
+const expected1 =
+  "INSERT INTO users (first_name, last_name) VALUES ('John', 'Doe');";
+
+// Bonus:
+const insertData2 = {
+  first_name: "John",
+  last_name: "Doe",
+  age: 30,
+  is_admin: false,
+};
+function insertFunctional(table, insertData) {
+  let keys = Object.keys(insertData);
+  return `INSERT INTO ${table} (${keys.join(", ")}) VALUES (${keys.map(x => typeof(insertData[x]) === "string" ? `'${insertData[x]}'` : insertData[x]).join(", ")})`;
+}
+console.log(insertFunctional(table, insertData1));
+console.log(insertFunctional(table, {}));
+console.log(insertFunctional(table, insertData2));
+
+
+module.exports = {
+  insert,
+};
+
+/* 
+  Recreate Object.entries method
+
+  Given an object,
+  return an array of arrays of the object's key value pairs, where each key value pair is a 2 item array
+
+  Do not include key value pairs from the given objects prototype (these are included by default when looping over an object's keys)
+*/
+
+const obj1 = { firstName: "Foo", lastName: "Bar", age: 13 };
+obj1.__proto__.keyOnProto = "val from proto";
+const expected1 = [
+  ["firstName", "Foo"],
+  ["lastName", "Bar"],
+  ["age", 13],
+];
+
+/**
+ * Returns a 2d array of key value pairs from @obj
+ * @param   {Object} obj
+ * @typedef {Array<Array<string, any>>} output
+ *          The nested arrays should look like: [key, val]
+ * @return  {output}
+ */
+function entries(obj) {
+  return Object.keys(obj).map(key => [key, obj[key]]);
+  
+}
+console.log(entries(obj1));
+
+//9/15/20
+/* 
+Given a search criteria object whose values will only be primitives (ints, strings, bools)
+and a list of objects,
+
+return any object that matches all the key value pairs in the search criteria object
+
+Bonus: write a 2nd solution using build in methods to practice functional programming
+*/
+
+const items = [
+  { firstName: "Bob", lastName: "Bobbert", age: 31 },
+  { firstName: "John", lastName: "Smith", age: 25 },
+  { firstName: "Bob", lastName: "Smith", age: 27 },
+  { firstName: "Bob", lastName: "White", age: 31 },
+];
+
+const searchCriteria1 = {
+  firstName: "Bob",
+  age: 31,
+};
+const expected1 = [
+  { firstName: "Bob", lastName: "Bobbert", age: 31 },
+  { firstName: "Bob", lastName: "White", age: 31 },
+];
+
+const searchCriteria2 = {
+  lastName: "Smith",
+};
+const expected2 = [
+  { firstName: "John", lastName: "Smith", age: 25 },
+  { firstName: "Bob", lastName: "Smith", age: 27 },
+];
+
+/**
+ * Finds the objects from @collection that match the @criteria
+ * @param   {Object} criteria
+ * @param   {Array<Object>} collection
+ * @return  {Array<Object>}
+ *          The found objects.
+ * Time:    O()
+ * Space:   O()
+ */
+function findObjects(criteria, collection) {
+  let result = [], check = false;
+  for (let i = 0; i<collection.length; i++){
+    // console.log("------outer loop: ",i);
+    for (key of Object.keys(criteria)){
+      // console.log("------inner loop: ");
+      // console.log("key: ",key);
+      // console.log("criteria[key]: ",criteria[key], ", collection[i][key]: ", collection[i][key] );
+      if (collection[i][key] == criteria[key]){
+        check = true;
+        // console.log("inside collection[i][key] == criteria[key]: ");
+        // console.log("check, in if: ",check);
+
+      }
+      else {
+        check =false;
+        // console.log("inside else");
+      }
+      // console.log("check, in inner loop: ",check);
+    }
+    // console.log("check, in outer loop: ",check);
+
+    if (check == true){
+      result.push(collection[i]);
+    }
+  }
+  return result;
+}
+
+function findObjects(criteria, collection) {
+  let result = [], check = false;
+  for (let i = 0; i<collection.length; i++){
+    for (key of Object.keys(criteria)){
+      check = collection[i][key] == criteria[key] ? true : false;
+      }
+
+    if (check == true){
+      result.push(collection[i]);
+    }
+  }
+  return result;
+}
+
+console.log(findObjects(searchCriteria1, items));
+console.log(findObjects(searchCriteria2, items));
+/**
+ * Time:    O()
+ * Space:   O()
+ */
+function findObjectsFunctional(criteria, collection) {}
+
+module.exports = {
+  findObjects,
+};
