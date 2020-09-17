@@ -22,7 +22,7 @@ module.exports = {
   getAll(req, res) {
     console.log("getAll method executed");
     Author
-      .find()
+      .find().sort({"name": 1})
       .then((authors) => {
         res.json(authors);
       })

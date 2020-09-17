@@ -37,59 +37,49 @@ const expected2 = [
  * @param   {Array<Object>} collection
  * @return  {Array<Object>}
  *          The found objects.
- * Time:    O()
- * Space:   O()
+ * Time:    O(n * m)
+ *          n = @collection length
+ *          m = num of keys in @criteria
+ * Space:   O(n) linear
+ *          All objects in @collection could be a match.
  */
 function findObjects(criteria, collection) {
-  let result = [], check = false;
-  for (let i = 0; i<collection.length; i++){
-    // console.log("------outer loop: ",i);
-    for (key of Object.keys(criteria)){
-      // console.log("------inner loop: ");
-      // console.log("key: ",key);
-      // console.log("criteria[key]: ",criteria[key], ", collection[i][key]: ", collection[i][key] );
-      if (collection[i][key] == criteria[key]){
-        check = true;
-        // console.log("inside collection[i][key] == criteria[key]: ");
-        // console.log("check, in if: ",check);
+  const foundDocuments = [];
 
+  for (const item of collection) {
+    let isMatch = true;
+
+    for (const searchKey in criteria) {
+      const searchVal = criteria[searchKey];
+
+      if (
+        item.hasOwnProperty(searchKey) === false ||
+        item[searchKey] !== searchVal
+      ) {
+        isMatch = false;
+        break;
       }
-      else {
-        check =false;
-        // console.log("inside else");
-      }
-      // console.log("check, in inner loop: ",check);
     }
-    // console.log("check, in outer loop: ",check);
-
-    if (check == true){
-      result.push(collection[i]);
+    if (isMatch) {
+      foundDocuments.push(item);
     }
   }
-  return result;
+  return foundDocuments;
 }
 
-function findObjects(criteria, collection) {
-  let result = [], check = false;
-  for (let i = 0; i<collection.length; i++){
-    for (key of Object.keys(criteria)){
-      check = collection[i][key] == criteria[key] ? true : false;
+function findObjectsFunction(criteria, collection) {
+  return collection.filter((doc) => {
+    for (const searchKey in criteria) {
+      if (
+        !doc.hasOwnProperty(searchKey) ||
+        doc[searchKey] !== criteria[searchKey]
+      ) {
+        return false;
       }
-
-    if (check == true){
-      result.push(collection[i]);
     }
-  }
-  return result;
+    return true;
+  });
 }
-
-console.log(findObjects(searchCriteria1, items));
-console.log(findObjects(searchCriteria2, items));
-/**
- * Time:    O()
- * Space:   O()
- */
-function findObjectsFunctional(criteria, collection) {}
 
 module.exports = {
   findObjects,

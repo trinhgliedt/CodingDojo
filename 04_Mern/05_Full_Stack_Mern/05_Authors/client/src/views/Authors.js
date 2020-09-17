@@ -12,6 +12,7 @@ const Authors = (props) => {
             .then((res) => {
                 console.log(res);
                 setAuthors(res.data);
+
             })
             .catch((err) => {
                 console.error(err);
