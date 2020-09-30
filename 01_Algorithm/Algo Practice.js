@@ -2968,3 +2968,437 @@ console.log(questionMarks(str2));
 console.log(questionMarks(str3));
 console.log(questionMarks(str4));
 module.exports = { questionMarks };
+//9/28/20
+class SLL {
+  constructor() {
+      this.head = null;
+  }
+
+  isEmpty() {
+      return this.head == null ? true : false;
+      // if (this.head === null) {
+      //     return true;
+      // }
+      // return false;
+  }
+  addToFront(node) {
+      node.next = this.head;
+      this.head = node;
+  }
+  addDataToFront(data) {
+      let node = new Node(data);
+      node.next = this.head;
+      this.head = node;
+  }
+
+  doStuff() {
+      // this.head
+      if (this.head !== null) {
+          this.head.next;
+      }
+  }
+}
+
+class Node {
+  constructor(data) {
+      this.data = data;
+      this.next = null;
+  }
+}
+
+var node = new Node(10);
+
+
+var mySLL = new SLL();
+
+var check = mySLL.isEmpty();
+console.log(check);
+
+mySLL.addToFront(new Node(10));
+mySLL.addDataToFront(10);
+console.log(mySLL);
+
+//9/26/20
+class SLL {
+  constructor() {
+      this.head = null;
+  }
+  
+  // console log the data of every node in the current list
+  read(){
+    var current = this.head;
+    while(current){
+      console.log("read: ",current.data);
+      current = current.next;
+    
+      // if(current.next === null){
+      //     console.log("this is the last node");
+      // } 
+  }
+  }
+  // find: return true / false if current list contains a data equal to value
+  contains(value) {
+    var current = this.head;
+    while(current){
+      if (current.data === value){
+        return true;
+      }
+      current = current.next;
+    
+      // if(current.next === null){
+      //     console.log("this is the last node");
+      // } 
+      return false;
+  }
+}
+
+  // return true / false if current list contains a data equal to value
+  // do not loop
+
+  // function calls itself
+  // base case that ends the crusive call
+  // change the inputs every time you call the function
+
+  recursiveContains(val, current) {
+    // if you didn't pass current, current should be the head
+    if (current === undefined) current = this.head;
+
+    // if current is null, return false up the call stack
+    if (current === null) return false;
+
+    // if runner.data === value, return true up the call stack
+    if (current.data === val) return true;
+
+    // otherwise return the result of contains for current.next
+    return this.recursiveContains(val, current.next);
+}
+
+  isEmpty() {
+      if (this.head === null) {
+          return true;
+      }
+      return false;
+  }
+
+  addToFront(node) {
+      node.next = this.head;
+      this.head = node;
+  }
+
+  addDataToFront(data) {
+      let node = new Node(data);
+      node.next = this.head;
+      this.head = node;
+  }
+}
+
+class Node {
+  constructor(data) {
+      this.data = data;
+      this.next = null;
+  }
+}
+
+var mySLL = new SLL();
+var node = new Node(10);
+var node = new Node(5);
+var node = new Node(22);
+
+
+mySLL.addToFront(new Node(10));
+mySLL.addToFront(new Node(5));
+mySLL.addToFront(new Node(22));
+// console.log(mySLL.isEmpty());
+// mySLL.addDataToFront(10);
+// mySLL.addDataToFront(5);
+// mySLL.addDataToFront(22);
+mySLL.read();
+// console.log(mySLL.contains(22));
+// console.log(mySLL.contains(35));
+console.log(mySLL.recursiveContains(35));
+console.log(mySLL.recursiveContains(22));
+
+
+// var myNewSLL = new SLL();
+// myNewSLL.addToFront(5);
+// myNewSLL.addToFront(22);
+// myNewSLL.addToFront(17);
+// myNewSLL.read();
+// myNewSLL.contains(22);
+// myNewSLL.contains(35);
+
+
+
+// var current = myNewSLL.head;
+
+// while(current){
+//   console.log(current.data);
+//   current = current.next;
+
+//   if(current.next === null){
+//       console.log("this is the last node");
+//   }
+// }
+//9/29/30
+class SLL {
+  constructor() {
+      this.head = null;
+  }
+  
+  // console log the data of every node in the current list
+  read(){
+    var current = this.head;
+    while(current){
+      console.log("read: ",current.data);
+      current = current.next;
+    
+      // if(current.next === null){
+      //     console.log("this is the last node");
+      // } 
+  }
+  }
+  // find: return true / false if current list contains a data equal to value
+  contains(value) {
+    var current = this.head;
+    while(current){
+      if (current.data === value){
+        return true;
+      }
+      current = current.next;
+    
+      // if(current.next === null){
+      //     console.log("this is the last node");
+      // } 
+      return false;
+  }
+}
+
+  // return true / false if current list contains a data equal to value
+  // do not loop
+
+  // function calls itself
+  // base case that ends the crusive call
+  // change the inputs every time you call the function
+
+  recursiveContains(val, current) {
+    // if you didn't pass current, current should be the head
+    if (current === undefined) current = this.head;
+
+    // if current is null, return false up the call stack
+    if (current === null) return false;
+
+    // if runner.data === value, return true up the call stack
+    if (current.data === val) return true;
+
+    // otherwise return the result of contains for current.next
+    return this.recursiveContains(val, current.next);
+}
+
+  isEmpty() {
+      if (this.head === null) {
+          return true;
+      }
+      return false;
+  }
+
+  addToFront(node) {
+      node.next = this.head;
+      this.head = node;
+  }
+
+  addDataToFront(data) {
+      let node = new Node(data);
+      node.next = this.head;
+      this.head = node;
+  }
+}
+
+class Node {
+  constructor(data) {
+      this.data = data;
+      this.next = null;
+  }
+}
+
+var mySLL = new SLL();
+var node = new Node(10);
+var node = new Node(5);
+var node = new Node(22);
+
+
+mySLL.addToFront(new Node(10));
+mySLL.addToFront(new Node(5));
+mySLL.addToFront(new Node(22));
+// console.log(mySLL.isEmpty());
+// mySLL.addDataToFront(10);
+// mySLL.addDataToFront(5);
+// mySLL.addDataToFront(22);
+mySLL.read();
+// console.log(mySLL.contains(22));
+// console.log(mySLL.contains(35));
+console.log(mySLL.recursiveContains(35));
+console.log(mySLL.recursiveContains(22));
+
+
+// var myNewSLL = new SLL();
+// myNewSLL.addToFront(5);
+// myNewSLL.addToFront(22);
+// myNewSLL.addToFront(17);
+// myNewSLL.read();
+// myNewSLL.contains(22);
+// myNewSLL.contains(35);
+
+
+
+// var current = myNewSLL.head;
+
+// while(current){
+//   console.log(current.data);
+//   current = current.next;
+
+//   if(current.next === null){
+//       console.log("this is the last node");
+//   }
+// }
+
+//9/30/20
+class Node {
+  constructor(data) {
+      this.data = data;
+      this.next = null;
+  }
+}
+
+class SLL {
+  constructor() {
+      this.head = null;
+      this.tail = null;
+  }
+
+  // Return the total amount of nodes in the list
+  size(){
+    if (this.head != null){
+      let count = 0;
+      let runner = this.head;
+      while (runner != null){
+        runner = runner.next;
+        count ++;
+      }
+      return count;      
+    }
+    return 0;
+
+  }
+
+  // Remove from front: remove and return the first node in the SLL
+  removeFromFront(){
+    if (this.head != null){
+      this.head = this.head.next;
+    }
+  }
+
+  // bonus: add a node to the end of the list.
+  addToBack(node){
+    if (this.head != null){
+      let runner = this.head;
+      while (runner.next != null){
+        runner = runner.next;
+        if (runner.next == null){
+          runner.next = node;
+          runner.next.next = null;
+        }
+      }
+    }
+  }
+  
+
+
+  // console log the data of every node in the current list
+  read() {
+      var current = this.head;
+
+      while (current) {
+          console.log(current.data);
+          current = current.next;
+      }
+  }
+
+  // find: return true / false if current list contains a data equal to value
+  contains(value) {
+      // start at the head
+      var runner = this.head;
+
+      // while we have a runner
+      while (runner) {
+
+          // return true if data === value
+          if (runner.data === value) {
+              return true;
+          }
+          // otherwise advance the runner
+          runner = runner.next;
+      }
+
+      return false;
+  }
+
+  // return true / false if current list contains a data equal to value
+  // do not loop
+  recursiveContains(val, current) {
+      // if you didn't pass current, current should be the head
+      if (current === undefined) current = this.head;
+
+      // if current is null, return false up the call stack
+      if (current === null) {
+          return false;
+      }
+
+      // if runner.data === value, return true up the call stack
+      if (current.data === val) return true;
+
+      // otherwise return the result of contains for current.next
+      return this.recursiveContains(val, current.next);
+  }
+
+  // return true / false if list is empty
+  isEmpty() {
+      if (this.head === null) {
+          return true;
+      }
+      return false;
+  }
+
+  // add node to front of list
+  addToFront(node) {
+      node.next = this.head;
+      this.head = node;
+  }
+
+  // create a node with data and add to front of list
+  addDataToFront(data) {
+      let node = new Node(data);
+      node.next = this.head;
+      this.head = node;
+  }
+}
+
+var mySLL = new SLL();
+  console.log(mySLL);
+  console.log("mySLL.size():", mySLL.size());
+  mySLL.addToFront(new Node(10));
+  // console.log(mySLL);
+  // console.log("mySLL.size():", mySLL.size());
+  mySLL.addToFront(new Node(5));
+  mySLL.addToFront(new Node(22));
+  mySLL.addToFront(new Node(30));
+  mySLL.addToFront(new Node(18));
+  console.log(mySLL);
+  console.log("mySLL.size():", mySLL.size());
+  mySLL.addToBack(new Node(99));
+  console.log(mySLL);
+  console.log("mySLL.size():", mySLL.size());
+
+  mySLL.removeFromFront();
+  console.log(mySLL);
+  console.log("mySLL.size():", mySLL.size());
+
