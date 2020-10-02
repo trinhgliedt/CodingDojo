@@ -3380,25 +3380,39 @@ class SLL {
       node.next = this.head;
       this.head = node;
   }
+
+  //10/1/20 
+  delete(val) {
+    if (this.head !== null) {
+        let runner = this.head;
+        if (runner.data == val){
+            console.log("inside if----");
+          this.head = runner.next;
+        }
+      //   console.log("this.head.data: ", this.head.data);
+        while (runner.next != null) {
+          // console.log("in while loop: runner.next:  ", runner.next);
+          if (runner.next.data == val){// then this is the node we want to delete
+            runner.next = runner.next.next;
+            return;
+          }
+          runner = runner.next;
+        }
+    }
+    return null;
+
 }
-
 var mySLL = new SLL();
-  console.log(mySLL);
-  console.log("mySLL.size():", mySLL.size());
-  mySLL.addToFront(new Node(10));
-  // console.log(mySLL);
-  // console.log("mySLL.size():", mySLL.size());
-  mySLL.addToFront(new Node(5));
-  mySLL.addToFront(new Node(22));
-  mySLL.addToFront(new Node(30));
-  mySLL.addToFront(new Node(18));
-  console.log(mySLL);
-  console.log("mySLL.size():", mySLL.size());
-  mySLL.addToBack(new Node(99));
-  console.log(mySLL);
-  console.log("mySLL.size():", mySLL.size());
-
-  mySLL.removeFromFront();
-  console.log(mySLL);
-  console.log("mySLL.size():", mySLL.size());
+mySLL.addToFront(new Node(10));
+// console.log(mySLL);
+// console.log("mySLL.size():", mySLL.size());
+mySLL.addToFront(new Node(5));
+mySLL.addToFront(new Node(22));
+mySLL.addToFront(new Node(30));
+mySLL.addToFront(new Node(18));
+console.log(mySLL);
+console.log("mySLL.size():", mySLL.size());
+mySLL.delete(5);
+console.log(mySLL);
+console.log("mySLL.size():", mySLL.size());
 
