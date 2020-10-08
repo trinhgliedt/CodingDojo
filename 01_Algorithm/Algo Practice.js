@@ -3415,4 +3415,298 @@ console.log("mySLL.size():", mySLL.size());
 mySLL.delete(5);
 console.log(mySLL);
 console.log("mySLL.size():", mySLL.size());
+//10/6/20
+// Stacks
+
+// A stack is a LIFO data structure
+// LAST IN, FIRST OUT
+// LIFO
+
+
+class arrStack {
+  constructor() {
+      this.items = [];
+  }
+
+  push(item) {
+      this.items.push(item);
+  }
+
+  pop() {
+      return this.items.pop();
+  }
+
+  peek() {
+      return this.items[this.items.length - 1];
+  }
+
+  isEmpty() {
+      if (this.items.length === 0) {
+          return true;
+      }
+      return false;
+  }
+}
+
+class Node {
+  constructor(data) {
+      this.data = data;
+      this.next = null;
+  }
+}
+
+class slStack {
+  constructor() {
+      this.top = null; // this.head, this.end
+  }
+
+  // add to top
+  push(newNode) { 
+      newNode.next = this.top
+      this.top = newNode;
+   }
+
+  // remove from top
+  pop() {
+      if (this.top == null) {
+          return;
+      }
+      var temp = this.top;
+      this.top = this.top.next;
+      return temp;
+   }
+
+  // aka check top
+  peek() {
+      return this.top;
+   }
+
+  // check if empty
+  isEmpty() { 
+      return (!this.top);
+  }
+}
+
+// buh buh bonus challenge: countStack
+
+// write the standalone function countStack
+// given a slStack, count the nodes
+// return the count
+// you may use one stack or array as additional storage
+// the given stack must be returned back to it's original order
+// you may only use public stack methods push pop peek isempty
+function countStack(stack) {
+  var temp = new slStack();
+  var count = 0;
+  while (!stack.isEmpty()) {
+      temp.push(stack.pop());
+      count ++;
+  }
+  while (!temp.isEmpty()){
+      stack.push(temp.pop());
+  }
+  return count;
+};
+var node1 = new Node(1);
+var node2 = new Node(2);
+var node3 = new Node(3);
+
+var stack1 = new slStack();
+stack1.push(node1);
+stack1.push(node2);
+stack1.push(node3);
+
+// console.log(stack1);
+// // stack1.pop();
+// console.log(stack1);
+// console.log(stack1.peek());
+// console.log(stack1.isEmpty());
+console.log(countStack(stack1));
+//10/5/20
+// Queue
+// FIFO (First in, first out)
+
+
+class Queue {
+  constructor() {
+      this.front = null;
+      this.rear = null;
+      this.length = 0;
+  }
+
+  enqueue(node){
+      if (this.length == 0){
+          this.front = node;
+          this.rear = node;
+      } else {
+          this.rear.next = node;
+          this.rear = node;
+      }
+      this.length++;
+  }
+
+  dequeue(){
+      if (this.front == null){
+          return;
+      }
+      var node = this.front;
+      this.front = this.front.next;
+      this.length--;
+      return node;
+  }
+
+  checkFront(){
+      return (this.front == null) ? null : this.front.data;
+  }
+
+  isEmpty(){
+      return (this.length == 0);
+  }
+
+  getLength(){
+      return this.length;
+  }
+}
+
+
+// Stacks
+
+// A stack is a LIFO data structure
+// LAST IN, FIRST OUT
+// LIFO
+
+// first in, first out
+
+class arrStack {
+  constructor() {
+      this.items = [];
+  }
+
+  push(item) {
+      this.items.push(item);
+  }
+
+  pop() {
+      return this.items.pop();
+  }
+
+  peek() {
+      return this.items[this.items.length - 1];
+  }
+
+  isEmpty() {
+      if (this.items.length === 0) {
+          return true;
+      }
+      return false;
+  }
+}
+
+class Node {
+  constructor(data) {
+      this.data = data;
+      this.next = null;
+  }
+}
+
+class slStack {
+  constructor() {
+      this.top = null; // this.head, this.end
+      this.length = 0;
+  }
+
+  // add to top
+  push(newNode) {
+      if (this.top === null) {
+          this.top = newNode;
+      } else {
+          newNode.next = this.top;
+          this.top = newNode;
+      }
+      this.length++;
+  }
+
+  // remove from top
+  pop() {
+      if (this.top === null) return null;
+
+      const removed = this.top;
+      this.top = this.top.next;
+      removed.next = null;
+      this.length--;
+
+      return removed;
+  }
+
+  // aka check top
+  peek() {
+      return this.head ? this.head.data : null;
+  }
+
+  // check if empty
+  isEmpty() {
+      return this.head === null;
+  }
+
+  length() {
+      return this.length;
+  }
+}
+
+function readQueue(q) {
+  var temp = new Queue();
+  var length = q.getLength();
+  for (var i = 0; i < length; i++){
+      console.log("Queue data: ", q.checkFront());
+      temp.enqueue(q.dequeue());
+  }
+  for (var i = 0; i < length; i++){
+      q.enqueue(temp.dequeue());
+  }
+}
+
+// buh buh bonus challenge: countStack
+
+// write the standalone function countStack
+// given a slStack, count the nodes
+// return the count
+// you may use one stack or array as additional storage
+// the given stack must be returned back to it's original order
+// you may only use public stack methods push pop peek isempty
+function countStack(stack) {
+  let newStack = new slStack();
+  let count = 0;
+
+  while (!stack.isEmpty()) {
+      let node = stack.pop();
+      newStack.push(node);
+      count++;
+  }
+
+  while (!newStack.isEmpty()) {
+      stack.push(newStack.pop()); h
+  }
+
+  return count;
+};
+
+var node1 = new Node(1);
+var node2 = new Node(2);
+var node3 = new Node(3);
+
+var queue1 = new Queue();
+// console.log(queue1.length);
+
+queue1.enqueue(node1);
+queue1.enqueue(node2);
+queue1.enqueue(node3);
+console.log(queue1);
+
+// queue1.dequeue(node1);
+readQueue(queue1);
+// console.log(queue1.length);
+console.log(queue1);
+// console.log("queue1.checkFront():", queue1.checkFront());
+// console.log(queue1.isEmpty());
+// console.log(queue1.getLength());
 
