@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.tgliedt.events.models.Event;
+import com.tgliedt.events.models.Message;
 import com.tgliedt.events.models.User;
 import com.tgliedt.events.services.EventService;
+import com.tgliedt.events.services.MessageService;
 import com.tgliedt.events.services.UserService;
 
 @Controller
@@ -29,6 +31,8 @@ public class EventController {
 	private EventService eventService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private MessageService messageService;
 	
 	@GetMapping("/events") //this is also the GET route for new event
 	public String renderEvents (Model model, HttpSession session, @ModelAttribute("event") Event event) {
@@ -99,7 +103,6 @@ public class EventController {
 	//Get route for update
 	@GetMapping("/events/{eventIdStr}/edit")
 	public String renderEditEvent(@PathVariable("eventIdStr") String eventIdStr, @ModelAttribute("event") Event event, HttpSession session, Model model) {
-		System.out.println("in line 101");
 		Long userId = (Long) session.getAttribute("userId");
 		if (userId == null) { //if user isn't logged in
 			return "redirect:/"; // redirect to log in/reg page
@@ -179,4 +182,50 @@ public class EventController {
 			return "redirect:/events";
 	}
 	
+	//Get route for new message. Get route for event details.
+	@GetMapping("events/{eventIdStr}")
+	public String renderOneEventPage(@ModelAttribute("message") Message message, @PathVariable("eventIdStr") String eventIdStr, @ModelAttribute("event") Event event, HttpSession session, Model model) {
+		Long eventId = Long.parseLong(eventIdStr);
+		Event thisEvent = eventService.getEventById(eventId);
+		if (thisEvent == null) { // If no event found
+			return "redirect:/events"; // redirect to events page
+		}
+		Long userId = (Long) session.getAttribute("userId");
+		if (userId == null) { //if user isn't logged in
+			return "redirect:/"; // redirect to log in/reg page
+		}
+		model.addAttribute("event", thisEvent);
+		
+		return "oneEventWithMsg.jsp";
+	}
+	
+	//Post route for new message. 
+	@PostMapping("events/{eventIdStr}")
+	public String createMsg(@PathVariable("eventIdStr") String eventIdStr, HttpSession session, @Valid @ModelAttribute("message") Message message, BindingResult result, Model model) { //We start with a message in modelAttribute that has messageText. We need to link this message to the event and the user(poster), and save it in the database.
+		Long userId = (Long) session.getAttribute("userId");
+		if (userId == null) { //if user isn't logged in
+			return "redirect:/"; // redirect to log in/reg page
+		}
+		
+		//Get event
+    	Long eventId = Long.parseLong(eventIdStr);
+		Event thisEvent = eventService.getEventById(eventId);
+		if (result.hasErrors()) {
+			model.addAttribute("event", thisEvent);
+            return "oneEventWithMsg.jsp";
+        } else {
+        	//Get user
+        	User thisUser = userService.findUserById(userId);
+        	// Link user to this message
+        	message.setUser(thisUser);
+        	
+    		// Link event to this message
+    		message.setEvent(thisEvent);
+    		
+    		// Create and save this message
+    		messageService.createMessage(message); 
+        }
+		
+		return "redirect:/events/" + eventIdStr;
+	}
 }

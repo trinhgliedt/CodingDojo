@@ -14,12 +14,12 @@
 </head>
 <body>
 	<div class="col-8 mt-5 mb-5">
-	<div class="row">
-		<p class="offset-7"><a href="/events">View all events</a>
-		<p class="offset-7"><a href="/logout">Log out</a></p>
-	</div>
 	<form:form action="/events/${event.id}/edit" method="post" modelAttribute="event">
-	<h3>${event.eventName}</h3>
+	<div class="row mb-4">
+		<h3 class="col-5">${event.eventName}</h3>
+		<a href="/events" class="mr-3 ml-5">View all events</a>
+		<a href="/logout" >Log out</a>
+	</div>
     	<input type="hidden" name="_method" value="put">
     		<p>
     			<input type="hidden" name="_method" value="put">
