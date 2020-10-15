@@ -69,14 +69,9 @@ Product thisProduct = productService.findById(id);
 		System.out.println("In products addCategory post route");
 		Product product = productService.findById(productId);
 		Category category = categoryService.findById(categoryId);
-//		System.out.println("In products addCategory line 71");
 		List<Category> categories = product.getCategories();
 		categories.add(category);
-//		System.out.println("In products addCategory line 74");
-//		product.setCategories(categories);
-//		System.out.println("In products addCategory line 76");
 		productService.update(product);
-//		System.out.println("In products addCategory line 78");
 		return "redirect:/products/" + product.getId();
 	}
 	
