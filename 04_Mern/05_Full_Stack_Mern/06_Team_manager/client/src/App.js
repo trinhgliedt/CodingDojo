@@ -17,9 +17,9 @@ function App() {
           <Redirect from="/players" to="/players/list" noThrow="true" />
           <NewPlayer path="/players/add-player" />
           <Players path="/players/list" />
-          {/* <SinglePlayer path="/players/:id" /> */}
-          {/* <EditPlayer path="/players/:id/edit" /> */}
-          {/* <NotFound default /> */}
+          <SinglePlayer path="/players/:id" />
+          <EditPlayer path="/players/:id/edit" />
+          <NotFound default />
         </Router>
     </div>
   );
