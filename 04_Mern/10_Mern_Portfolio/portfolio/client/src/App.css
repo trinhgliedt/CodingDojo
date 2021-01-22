@@ -1,21 +1,60 @@
 * {
-    /* outline: 1px solid grey; */
-    color: white;
+  /* outline: 1px solid grey; */
+  color: white;
 }
 
-body, .bgGradient {
-    background: radial-gradient(rgb(173, 175, 120), rgb(31, 28, 28)); 
-  }
+:root {
+  --lightGreenFont: rgb(119, 233, 42);
+  --yellowFont: yellow;
+  --orangeFont: orange;
+  --purpleFont: rgb(235, 80, 235);
+  --silverFont: silver;
+}
 
-#aboutMe, h2 {
-    position: relative;
-    z-index: 2;
+body,
+.bgGradient {
+  background: radial-gradient(rgb(173, 175, 120), rgb(31, 28, 28));
+}
+
+#aboutMe,
+h2 {
+  position: relative;
+  z-index: 2;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .largeTitle {
+    font-size: 1.2em;
+  }
 }
 
 #aboutMe {
-    margin-top: 10px;
-    height: auto;
-    border-radius: 30px;
-    padding: 40px;
-    background: radial-gradient(rgba(114, 116, 68, 0.575), rgba(61, 54, 54, 0.678));
+  margin-top: 0.8em;
+  height: auto;
+  border-radius: 2.2em;
+  padding: 3.5%;
+  background: radial-gradient(
+    rgba(114, 116, 68, 0.575),
+    rgba(61, 54, 54, 0.678)
+  );
+}
+.lightGreenFont {
+    color: var(--lightGreenFont);
+}
+.orangeFont {
+    color: var(--orangeFont);
+}
+.yellowFont {
+    color: var(--yellowFont);
+}
+.purpleFont {
+    color: var(--purpleFont);
+}
+.silverFont {
+  color: var(--silverFont);
+}
+
+.whiteFont {
+  color: white;
 }

@@ -16,7 +16,7 @@ function App(props) {
   return (
     <div style={{ maxWidth: '1200px', height:"3000px" }} className="App container" >
     <Background/>
-      <h2  className="text-center mb-4 pt-4 mt-0">Trinh Gliedt</h2>
+      <h2 className="largeTitle text-center mb-lg-4 mb-md-2 mb-sm-2 py-lg-2 py-md-1 py-sm-1 mt-0">Trinh Gliedt</h2>
       <NavBar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       
       <div id="pageContent" style={{ position: 'relative', zIndex: '2' }}>

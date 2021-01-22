@@ -3,7 +3,7 @@
     backface-visibility: hidden;
     vertical-align: middle;
     position:relative;
-    box-shadow: 0 0 1px rgba(0,0,0,0);
+    box-shadow: 0 0 0.02em rgba(0,0,0,0);
     transform: translateZ(0);
     transition-duration: .3s;
     transition-property:transform;
@@ -16,9 +16,9 @@
     content: '';
     top: 100%;
     left: 5%;
-    height:10px;
-    width:90%;
-    opacity:0;
+    height: 0.5em;
+    width: 90%;
+    opacity: 0;
     background: -webkit-radial-gradient(center, ellipse, rgba(230, 7, 7, 0.35) 0%, rgba(235, 8, 8, 0) 80%);
     background: radial-gradient(ellipse at center, rgb(250, 142, 1) 0%, rgba(250, 176, 176, 0) 80%);
     /* W3C */
@@ -27,39 +27,39 @@
   }
   
   .hoverable:hover, .hoverable:active, .hoverable:focus{
-    transform: translateY(-5px);
+    transform: translateY(-0.2em);
   }
   .hoverable:hover:before, .hoverable:active:before, .hoverable:focus:before{
     opacity: 1;
-    transform: translateY(-5px);
+    transform: translateY(-0.2em);
   }
   
   
   
   @keyframes bounce-animation {
     16.65% {
-      -webkit-transform: translateY(8px);
-      transform: translateY(8px);
+      -webkit-transform: translateY(0.3em);
+      transform: translateY(0.3em);
     }
   
     33.3% {
-      -webkit-transform: translateY(-6px);
-      transform: translateY(-6px);
+      -webkit-transform: translateY(-0.25em);
+      transform: translateY(-0.25em);
     }
   
     49.95% {
-      -webkit-transform: translateY(4px);
-      transform: translateY(4px);
+      -webkit-transform: translateY(0.15em);
+      transform: translateY(0.15em);
     }
   
     66.6% {
-      -webkit-transform: translateY(-2px);
-      transform: translateY(-2px);
+      -webkit-transform: translateY(-0.08em);
+      transform: translateY(-0.08em);
     }
   
     83.25% {
-      -webkit-transform: translateY(1px);
-      transform: translateY(1px);
+      -webkit-transform: translateY(0.04em);
+      transform: translateY(0.04em);
     }
   
     100% {
@@ -74,36 +74,41 @@
   }
   
   
-  @media (min-width: 768px) {
-    .navbar{
-      text-align: center !important;
-      float: none;
-      display: inline-block;
-    }
-  }
-  
   @import url('https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap');
 
-.menuItem{
+.menuItem, .activeTab {
   font-family: 'Henny Penny', sans-serif;
-  font-size: larger;
+  font-size: 1.2em;
+  border-radius: 1.2em;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .menuItem, .activeTab {
+    font-size: 1em;
+  }
+  .activeTab {
+    border-radius: 1em;
+  }
+}
+
+.menuItem {
+  background: radial-gradient(rgba(47, 46, 28, 0.897), rgba(61, 54, 54, 0.678));
+  color: white;
 }
 
 .activeTab {
-  border-radius: 30px;
-  background: radial-gradient(rgba(114, 116, 68, 0.575), rgba(61, 54, 54, 0.678));
-  font-family: 'Henny Penny', sans-serif;
-  font-size: larger;
+  background: radial-gradient(rgba(135, 138, 70, 0.575), rgba(83, 74, 74, 0.678));
 }
 
 .linkNote {
     position:relative;
     z-index:2;
-    border-radius: 30px;
-  background: radial-gradient(rgba(126, 128, 78, 0.472), rgba(61, 54, 54, 0.678));
-  text-align: center;
-  padding: 50px 0;
-  margin-top: 10px;
+    border-radius: 2em;
+    background: radial-gradient(rgba(126, 128, 78, 0.472), rgba(61, 54, 54, 0.678));
+    text-align: center;
+    padding: 3.5em 0;
+    margin-top: 1.2em;
 }
 
 .linkNoteHidden {

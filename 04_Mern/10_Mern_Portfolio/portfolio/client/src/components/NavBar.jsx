@@ -28,51 +28,58 @@ function NavBar(props) {
 
   return (
     <>
-    <div id="navbarwrap" className="row" style={{ position: 'relative', zIndex: '2'}}>
-      <div className="col hoverable mx-2 text-center" >
+    <div id="navbarwrap" className="row d-flex justify-content-around" style={{ position: 'relative', zIndex: '2'}}>
+      {/* About Me */}
+      <div className="hoverable text-center mb-lg-2 mb-md-2 mb-sm-1" >
         <div id="intro"
-        className={selectedTab === "intro" ? "activeTab btn selected col text-white" : "menuItem hoverable btn selected col text-white"} 
+        className={selectedTab === "intro" ? "px-lg-5 px-md-4 px-sm-2 activeTab btn col text-success" : "px-lg-5 px-md-4 px-sm-2 menuItem hoverable btn col text-white"} 
         onClick={e => handleSelection(e)}
         >About Me</div>
       </div>
-
-      <div  className="col hoverable mr-2 text-center" >
+      
+      {/* Projects */}
+      <div  className="hoverable text-center mb-lg-2 mb-md-2 mb-sm-1" >
         <div id="projects" 
-        className={selectedTab === "projects" ? "activeTab btn selected col text-white" : "menuItem hoverable btn selected col text-white"} 
+        className={selectedTab === "projects" ? "px-lg-5 px-md-4 px-sm-2 activeTab btn col text-success" : "px-lg-5 px-md-4 px-sm-2 menuItem hoverable btn col text-white"} 
         onClick={e => handleSelection(e)}
         >Projects</div>
       </div>
 
-      <div  className="col hoverable mr-2 text-center">
+      {/* Resume */}
+      <div  className="hoverable text-center mb-lg-2 mb-md-2 mb-sm-1">
         <div id="resume" 
-        className={selectedTab === "resume" ? "activeTab btn selected col text-white" : "menuItem hoverable btn selected col text-white"} 
+        className={selectedTab === "resume" ? "px-lg-5 px-md-4 px-sm-2 activeTab btn col text-success" : "px-lg-5 px-md-4 px-sm-2 menuItem hoverable btn col text-white"} 
         onClick={e => handleSelection(e)}
         >Resume</div>
       </div>
-      <div  className="col hoverable mr-2 text-center">
-        
+      
+      {/* LinkedIn */}
+      <div  className="hoverable text-center mb-lg-2 mb-md-2 mb-sm-1">
         <a href="https://www.linkedin.com/in/trinhgliedt/" target="_blank" rel="noreferrer"
-        id="linkedIn"
         style={{ position: 'relative', zIndex: '3'}}
-        className={selectedTab === "linkedIn" ? "activeTab btn selected col text-white" : "menuItem hoverable btn selected col text-white"} 
+        className={selectedTab === "linkedIn" ? "px-lg-5 px-md-4 px-sm-2 activeTab btn col text-success" : "px-lg-5 px-md-4 px-sm-2 menuItem hoverable btn col text-white"} 
         onClick={e => handleSelection(e)}
         >LinkedIn</a>
       </div>
-      <div id="gitHub" className="col hoverable mr-2 text-center">
+      
+      {/* Github */}
+      <div id="gitHub" className="hoverable text-center mb-lg-2 mb-md-2 mb-sm-1">
         <a href="https://github.com/trinhgliedt" target="_blank" rel="noreferrer"
-        id="gitHub" 
-        className={selectedTab === "gitHub" ? "activeTab btn selected col text-white" : "menuItem hoverable btn selected col text-white"} 
+        className={selectedTab === "gitHub" ? "px-lg-5 px-md-4 px-sm-2 activeTab btn col text-success" : "px-lg-5 px-md-4 px-sm-2 menuItem hoverable btn col text-white"} 
         onClick={e => handleSelection(e)}
         >GitHub</a>
       </div>
 
-      <div id="certificates" className="col mr-2 text-center hoverable">
+      {/* Certificates */}
+      <div id="certificates" className="hoverable text-center mb-lg-2 mb-md-2 mb-sm-1">
       <div id="certificates" 
-        className={selectedTab === "certificates" ? "activeTab btn selected col text-white" : "menuItem hoverable btn selected col text-white"} 
+        className={selectedTab === "certificates" ? "px-lg-5 px-md-4 px-sm-2 activeTab btn col text-success" : "px-lg-5 px-md-4 px-sm-2 menuItem hoverable btn col text-white"} 
         onClick={e => handleSelection(e)}
         >Certificates</div>
       </div>
     </div>
+
+
     <div className={selectedTab === "gitHub" ? "linkNote" : "linkNoteHidden"} 
     id="gitHubLinkClicked">..... You were directed to my Github page ..... </div>
     <div  className={selectedTab === "linkedIn" ? "linkNote" : "linkNoteHidden"}  
