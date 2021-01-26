@@ -24,4 +24,29 @@
       margin: 0;
     }
   }
+  .callToActions {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      list-style-type: none;
+      a {
+        font-size: 1.6rem;
+        line-height: 1;
+        color: black;
+        font-weight: 550;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+    }
+  }
 }
