@@ -37,14 +37,19 @@ class EmailPassword extends Component {
       const config = {
         url: "http://localhost:3000/login",
       };
-      await auth.sendPasswordResetEmail(email, config).then(() => {
-        this.props.history.push("/login");
-      });
+      await auth
+        .sendPasswordResetEmail(email, config)
+        .then(() => {
+          this.props.history.push("/login");
+        })
+        .catch(() => {
+          const err = ["Email not found. Please try again."];
+          this.setState({
+            errors: err,
+          });
+        });
     } catch (err) {
-      const err = ["Email not found. Please try again."];
-      this.setState({
-        errors: err,
-      });
+      console.log(err);
     }
   };
 
