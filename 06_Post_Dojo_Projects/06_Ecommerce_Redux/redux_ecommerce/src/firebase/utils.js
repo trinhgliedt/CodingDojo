@@ -4,6 +4,7 @@ import "firebase/auth";
 import { firebaseConfig } from "./config";
 
 firebase.initializeApp(firebaseConfig);
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
@@ -13,6 +14,7 @@ GoogleProvider.setCustomParameters({ prompt: "select_account" });
 export const handleUserProfile = async ({ userAuth, additionalData }) => {
   if (!userAuth) return;
   const { uid } = userAuth;
+
   const userRef = firestore.doc(`users/${uid}`);
   const snapshot = await userRef.get();
 
@@ -30,9 +32,10 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
         ...additionalData,
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
+
   return userRef;
 };
 

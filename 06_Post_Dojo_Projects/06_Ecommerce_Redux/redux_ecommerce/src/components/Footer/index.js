@@ -1,13 +1,14 @@
-import React from "react";
-import "./styles.scss";
-const Footer = (props) => {
+import React from 'react';
+import './styles.scss';
+
+const Footer = props => {
   return (
-    <div>
-      <footer className="footer">
-        <div className="wrap">© ForeverYou 2021</div>
-      </footer>
-    </div>
+    <footer className="footer">
+      <div className="wrap">
+        © SimpleTut 2020
+      </div>
+    </footer>
   );
-};
+}
 
 export default Footer;
