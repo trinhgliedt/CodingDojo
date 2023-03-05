@@ -1,4 +1,4 @@
-const countryList = [
+var countryListHard = [
   "Afghanistan",
   "Albania",
   "Algeria",
@@ -249,6 +249,20 @@ const countryList = [
   "Zimbabwe",
   "Åland Islands",
 ];
+const easyCountries = countryListHard.filter(country => country.length <= 13);
+let countryList = easyCountries;
+
+const levelSelect = document.getElementById("level");
+// console.log({easyCountries});
+function updateCountryList(){
+  if (levelSelect.value === "hard"){
+    countryList = countryListHard;
+  };
+}
+levelSelect.addEventListener("change", (event) => {
+  console.log(event.target.value);
+  updateCountryList();
+});
 
 function getRandomCountries(countryList, numberOfCountriesToPick) {
   const randomCountries = [];
@@ -339,20 +353,55 @@ function generateList(numberOfWords, numberOfCountriesEachWord) {
   const scrambledCountryList = combinedCountryList.map(str => shuffleStringAndRemoveWhiteSpace(str));
   pushResultToDOM("scrambled-section",scrambledCountryList,"Scrambled List");
   pushResultToDOM("original-section",combinedCountryList,"Original List");
-  pushResultToDOM("all-countries-section",countryList,"List of all countries");
-  // console.log(combinedCountryList);
-  // console.log(scrambledCountryList);
 }
-const form = document.querySelector("form");
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault(); // prevent the form from submitting
-  const numOfWords = parseInt(document.querySelector("#num-of-words").value);
-  const numOfCountries = parseInt(
-    document.querySelector("#num-of-countries").value
-  );
-  // console.log(
-  //   `Number of words: ${numOfWords}, Number of countries: ${numOfCountries}`
-  // );
+const form = document.querySelector("form");
+const numOfWordsInput = document.getElementById("num-of-words");
+const numOfCountriesInput = document.getElementById("num-of-countries");
+const currentNumOfWords = numOfWordsInput.value;
+
+
+function updateMaxValues() {
+  const maxLength = countryList.length;
+  const maxWords = Math.floor(maxLength / numOfCountriesInput.value);
+  const maxCountries = Math.floor(maxLength / numOfWordsInput.value);
+
+  numOfWordsInput.max = maxWords;
+  numOfCountriesInput.max = maxCountries;
+
+  // Check if the value of numOfWordsInput has changed
+  if (numOfWordsInput.value !== currentNumOfWords) {
+    currentNumOfWords = numOfWordsInput.value;
+
+    // Calculate the new max value for numOfCountriesInput
+    const newMaxCountries = Math.floor(maxLength / currentNumOfWords);
+    const currentNumOfCountries = parseInt(numOfCountriesInput.value);
+
+    // Update the default value of numOfCountriesInput
+    if (currentNumOfCountries > newMaxCountries) {
+      numOfCountriesInput.defaultValue = newMaxCountries;
+    }
+  }
+}
+
+numOfWordsInput.addEventListener("change", updateMaxValues);
+numOfCountriesInput.addEventListener("change", updateMaxValues);
+const generateButton = document.getElementById("generate");
+const printAllButton = document.getElementById("print-countries");
+const removePrintAllButton = document.getElementById("remove-print-countries");
+generateButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const numOfWords = numOfWordsInput.value;
+  const numOfCountries = numOfCountriesInput.value;
   generateList(numOfWords, numOfCountries);
 });
+printAllButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  pushResultToDOM("all-countries-section",countryList,"List of all countries");
+});
+removePrintAllButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  document.getElementById("all-countries-section").innerHTML='';
+});
+
+

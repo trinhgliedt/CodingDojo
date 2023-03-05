@@ -1,84 +1,132 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Word scrambler</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <style>
-      label {
-        margin-right: 20px;
-      }
-      div {
-        margin-bottom: 20px;
-      }
-      #form-section {
-        background-color: grey;
-        color: white;
-        padding: 40px;
-      }
-      input {
-        background-color: rgb(100, 96, 96);
-        color: white;
-        border-radius: 4px;
-      }
-      button {
-        background-image: radial-gradient(
-          100% 100% at 100% 0,
-          #5adaff 0,
-          #5468ff 100%
-        );
-        border: 0;
-        border-radius: 6px;
-        box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
-          rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
-          rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
-        padding: 10px;
-        color: white;
-        cursor: pointer;
-      }
-      #result-section {
-        display: flex;
-      }
-      #result-section > div {
-        width: 50%;
-      }
+        h1 {
+            margin-top: 0;
+        }
+        label {
+            margin-right: 20px;
+        }
+
+        #form-section div:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        #form-section {
+            background: linear-gradient(15deg, red, orange, yellow, green, blue, indigo, violet, red);
+            color: white;
+            padding: 40px;
+        }
+
+        li {
+            overflow-wrap: break-word;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        input,
+        select {
+            background: linear-gradient(60deg, rgb(15, 71, 55) 0%, rgba(253,135,45,1) 100%);
+            color: white;
+            border-radius: 4px;
+            padding: 6px;
+        }
+        #level {
+            background-color: rgb(62, 64, 66);
+        }
+        input {
+            border: none;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #430101, 0 1px 0 #1b1818;
+        }
+        .black-overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        #result-section {
+            display: flex;
+        }
+
+        #non-form-section {
+            min-height: 60vh;
+            background: linear-gradient(270deg, #f6e6b4 0%, #ed9017);
+            padding: 20px;
+        }
+
+        #result-section>div {
+            width: 50%;
+        }
+
+        button {
+            border: 0;
+            border-radius: 6px;
+            box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+                rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+                rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button#generate {
+            background: linear-gradient(-45deg, #ccff00 0%, #ff0084 100%);
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        #print-btn-wrap button:first-child {
+            margin-right: 10px;
+        }
+        #print-btn-wrap button {
+            background: linear-gradient(-45deg, #150ab7 0%, rgb(25, 110, 1) 100%);
+        }
     </style>
     <div id="form-section">
-      <h1>Generate scrambled words made of letters from country names</h1>
-      <form>
-        <div>
-          <label for="num-of-words">Number of words to generate</label>
-          <input
-            type="number"
-            value="20"
-            id="num-of-words"
-            name="num-of-words"
-            min="0"
-            step="1"
-          />
+        <div class="black-overlay">
+            <h1>Generate scrambled words made of letters from country names</h1>
+            <form>
+                <div>
+                    <label for="num-of-words">Number of words to generate</label>
+                    <input type="number" value="20" id="num-of-words" name="num-of-words" min="1" step="1" />
+                </div>
+                <div>
+                    <label for="num-of-countries">Number of countries for each word</label>
+                    <input type="number" value="2" id="num-of-countries" name="num-of-words" min="1" step="1" />
+                </div>
+                <div>
+                    <label for="level">Level:</label>
+                    <select id="level" name="level">
+                        <option value="easy">Easy</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div>
+                    <button id="generate">Generate list</button>
+                </div>
+                <div id="print-btn-wrap">
+                    <button id="print-countries">Print all countries list</button>
+                    <button id="remove-print-countries">Remove all countries list</button>
+                </div>
+            </form>
         </div>
-        <div>
-          <label for="num-of-countries"
-            >Number of countries for each word</label
-          >
-          <input
-            type="number"
-            value="2"
-            id="num-of-countries"
-            name="num-of-words"
-            min="0"
-            step="1"
-          />
+    </div>
+    <div id="non-form-section">
+        <div id="result-section">
+            <div id="scrambled-section"></div>
+            <div id="original-section"></div>
         </div>
-        <button type="submit">Generate list</button>
-      </form>
+        <div id="all-countries-section"></div>
     </div>
-    <div id="result-section">
-      <div id="scrambled-section"></div>
-      <div id="original-section"></div>
-    </div>
-    <div id="all-countries-section"></div>
-
     <script src="word-scramble.js"></script>
-  </body>
+</body>
+
 </html>
