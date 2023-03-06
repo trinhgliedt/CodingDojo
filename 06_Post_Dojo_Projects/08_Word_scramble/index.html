@@ -63,7 +63,7 @@
         }
 
         #result-section>div {
-            width: 50%;
+            display: inline-block;
         }
 
         button {
@@ -89,12 +89,15 @@
         #print-btn-wrap button {
             background: linear-gradient(-45deg, #150ab7 0%, rgb(25, 110, 1) 100%);
         }
+        #all-countries-list {
+            display: flex;
+        }
     </style>
     <div id="form-section">
         <div class="black-overlay">
             <h1>Generate scrambled words made of letters from country names</h1>
             <form>
-                <div>
+                <div> 
                     <label for="num-of-words">Number of words to generate</label>
                     <input type="number" value="20" id="num-of-words" name="num-of-words" min="1" step="1" />
                 </div>
@@ -124,7 +127,8 @@
             <div id="scrambled-section"></div>
             <div id="original-section"></div>
         </div>
-        <div id="all-countries-section"></div>
+        <div id="all-countries-section">
+        </div>
     </div>
     <script src="word-scramble.js"></script>
 </body>

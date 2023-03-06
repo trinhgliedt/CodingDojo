@@ -397,7 +397,39 @@ generateButton.addEventListener("click", (event) => {
 });
 printAllButton.addEventListener("click", (event) => {
   event.preventDefault();
-  pushResultToDOM("all-countries-section",countryList,"List of all countries");
+  
+    // The country list is long. 
+    // I"m breaking it out to 4 parts to print
+  // Add an <h2> element before the list
+  const heading = document.createElement("h2");
+  const headingText = document.createTextNode("List of all countries");
+  heading.appendChild(headingText);
+  const outerContainer = document.getElementById('all-countries-section');
+  outerContainer.innerHTML='';
+  outerContainer.appendChild(heading);
+  const container= document.createElement("div");
+  container.setAttribute('id',"all-countries-list");
+  outerContainer.appendChild(container);
+  const chunkSize = Math.ceil(countryList.length / 4);
+  const chunks = [];
+  for (let i = 0; i < countryList.length; i += chunkSize) {
+    chunks.push(countryList.slice(i, i + chunkSize));
+  }
+
+  // Loop through each chunk and create an ordered list
+  let index = 1;
+  for (let chunk of chunks) {
+    const ol = document.createElement('ol');
+    ol.setAttribute('start', index); // Set the start attribute to index
+    for (let country of chunk) {
+      const li = document.createElement('li');
+      li.innerText = country;
+      ol.appendChild(li);
+      index++;
+    }
+    container.appendChild(ol);
+  }
+  // pushResultToDOM("all-countries-section",countryList,"List of all countries");
 });
 removePrintAllButton.addEventListener("click", (event) => {
   event.preventDefault();
